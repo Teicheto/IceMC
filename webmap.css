@@ -1,0 +1,53 @@
+
+  body, html {
+     margin: 0;
+     padding: 0;
+     height: 100%;
+     overflow: hidden;
+     background: linear-gradient(to bottom, red, purple);
+ }
+ .full-image {
+     background: url('your-image.jpg') no-repeat center center;
+     background-size: contain;
+     height: 100%;
+     width: 100%;
+     cursor: grab;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ .full-image img {
+     max-width: 100%;
+     max-height: 100%;
+     transform-origin: center center;
+ }
+ .details {
+     position: absolute;
+     bottom: 10px;
+     left: 10px;
+     background: rgba(0, 0, 0, 0.5);
+     color: white;
+     padding: 5px 10px;
+     border-radius: 5px;
+ }
+ 
+ .menu {
+     background: linear-gradient(to right, red, purple);
+     padding: 15px;
+     display: flex;
+     justify-content: center;
+     gap: 10px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+ }
+ .menu a {
+     color: white;
+     text-decoration: none;
+     font-size: 16px;
+     transition: 0.3s;
+     padding: 8px 15px;
+     border-radius: 5px;
+ }
+ .menu a:hover {
+     background: #ffcc00;
+     color: black;
+}

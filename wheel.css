@@ -1,0 +1,99 @@
+
+body {
+    background: linear-gradient(to bottom, red, purple);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    background: linear-gradient(to right, red, purple);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+.menu a:hover {
+    background: #ffcc00;
+    color: black;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+.wheel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 4s ease-out;
+}
+.arrow {
+    position: absolute;
+    top: -30px;
+    left: 52%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 40px solid #fff;
+}
+.spin-btn {
+    background: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+.spin-btn:hover {
+    background: #9b00ff;
+}
+.form-container {
+    margin-top: 20px;
+    display: none;
+}
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+.form-container button {
+    background: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form-container button:hover {
+    background: #9b00ff;
+}
+.timer {
+    margin-top: 20px;
+    font-size: 18px;
+}

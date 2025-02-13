@@ -1,0 +1,158 @@
+
+ body {
+    background: linear-gradient(to bottom, black, #2d004d);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    background: linear-gradient(to right, red, purple);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+.menu a:hover {
+    background: #ffcc00;
+    color: black;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+.server-info {
+    background: linear-gradient(to right, red, purple);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+    from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+    to { box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); }
+}
+.news, .sidebar {
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.news {
+    flex: 2;
+    background: linear-gradient(to right, red, purple);
+    padding: 15px;
+}
+.news-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.sidebar {
+    flex: 1;
+    background: linear-gradient(to right, red, purple);
+    padding: 15px;
+}
+.btn {
+    background: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #9b00ff;
+}
+.staff {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.staff img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 10px;
+    border: 3px solid white;
+}
+.staff {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Разстояние между играчите */
+    padding: 20px;
+    text-align: center;
+}
+.staff-member {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+.staff-member:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+}
+.staff img {
+    width: 100px; /* Размер на снимките */
+    height: 100px;
+    border-radius: 50%; /* Кръгли снимки */
+    object-fit: cover;
+    border: 3px solid #ffcc00;
+}
+.staff p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+}
+.discord-section {
+    background: linear-gradient(to bottom, #007BFF, #6db5fe);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0px 0px 15px rgba(0, 123, 255, 0.5);
+}
+.discord-section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+.discord-section p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.discord-btn {
+    display: inline-block;
+    background: #0c40fa;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.discord-btn:hover {
+    background: #5865F2;
+    transform: scale(1.1);
+}

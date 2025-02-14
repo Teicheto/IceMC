@@ -54,7 +54,32 @@
                     </div>
                 </div>                
             </div>
-        <script src="mainpage.js"></script>  
+        <script src="mainpage.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const starContainer = document.createElement("div");
+                starContainer.classList.add("stars");
+                document.body.appendChild(starContainer);
+        
+                for (let i = 0; i < 150; i++) { 
+                    let star = document.createElement("div");
+                    star.classList.add("star");
+                    let x = Math.random() * window.innerWidth;
+                    let y = Math.random() * window.innerHeight;
+                    let duration = Math.random() * 1.5 + 1;
+                    let size = Math.random() * 3 + 1;
+        
+                    star.style.left = `${x}px`;
+                    star.style.top = `${y}px`;
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.animationDuration = `${duration}s`;
+        
+                    starContainer.appendChild(star);
+                }
+            });
+        </script>
+        
     </body>
     </html>
     

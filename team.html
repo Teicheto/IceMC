@@ -20,11 +20,35 @@
             <form id="contactForm">
                 <input type="text" id="discordName" name="discordName" placeholder="Вашето име в Discord" required>
                 <input type="text" id="minecraftName" name="minecraftName" placeholder="Вашето име в Minecraft" required>
-                <textarea id="message" name="message" rows="5" placeholder="Вашето съобщение" required></textarea>
+                <textarea id="message" name="message" rows="5" placeholder="Вашето съобщение" required style="resize: none;"></textarea>
                 <button type="submit">Изпрати</button>
             </form>
         </div>
     </div>
     <script src="team.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const starContainer = document.createElement("div");
+            starContainer.classList.add("stars");
+            document.body.appendChild(starContainer);
+    
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                let duration = Math.random() * 1.5 + 1;
+                let size = Math.random() * 3 + 1;
+    
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDuration = `${duration}s`;
+    
+                starContainer.appendChild(star);
+            }
+        });
+    </script>    
 </body>
 </html>

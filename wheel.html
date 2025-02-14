@@ -15,12 +15,12 @@
         <a href="team.html">Екип</a>
     </div>
     <div class="container">
-        <h1>Колело на късмета</h1>
         <div class="wheel-container">
             <div class="arrow"></div>
             <canvas id="wheel" class="wheel" width="300" height="300"></canvas>
         </div>
         <button class="spin-btn" id="spinBtn">Завърти</button>
+        <h1>Колело на късмета</h1>
         <div class="form-container" id="formContainer">
             <h2>Въведете вашето име в Minecraft</h2>
             <input type="text" id="minecraftName" placeholder="Вашето име в Minecraft" required>
@@ -29,5 +29,20 @@
         <div class="timer" id="timer"></div>
     </div>
     <script src="wheel.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function() {
+        const starsContainer = document.createElement('div');
+        starsContainer.classList.add('stars');
+        document.body.appendChild(starsContainer);
+    
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDuration = `${Math.random() * 1.5 + 1}s`;
+            starsContainer.appendChild(star);
+        }
+    });
+    </script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const submitBtn = document.getElementById('submitBtn');
 const minecraftNameInput = document.getElementById('minecraftName');
 const timer = document.getElementById('timer');
 
-const prizes = ['Food Crate Key', 'x32 Diamonds', 'x64 Golden Ingots', 'x128 Iron Ingots', 'Lemon Sword', 'x1 Netherite Ingot'];
+const prizes = ['Vip role', 'x32 Diamonds', 'x64 Golden Ingots', 'x128 Iron Ingots', 'Lemon Sword', 'x1 Netherite Ingot', 'Manqk role'];
 let prize;
 
 const ctx = wheel.getContext('2d');

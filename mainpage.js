@@ -1,6 +1,6 @@
 async function fetchPlayers() {
     try {
-        let response = await fetch(`https://mcapi.us/server/status?ip=thebgminecraft.srvplay.eu`);
+        let response = await fetch(`https://mcapi.us/server/status?ip=icemc.mc-games.xyz`);
         let data = await response.json();
         if (data.online) {
             document.getElementById("players-online").innerText = data.players.now;
@@ -26,7 +26,7 @@ setTimeout(() => { star.remove(); }, 5000);
 setInterval(createStar, 300);
 
 function copyIP() {
-const ip = "thebgminecrafts2.srvplay.eu"; // Твоето IP
+const ip = "icemc.mc-games.xyz"; // Твоето IP
 navigator.clipboard.writeText(ip).then(() => {
 alert("IP адресът е копиран: " + ip);
 }).catch(err => {

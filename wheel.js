@@ -108,7 +108,7 @@ submitBtn.addEventListener('click', async () => {
     const webhookURL = 'https://discord.com/api/webhooks/1339618228011532430/ALCZreCT18Q5CTVUDISwIWt3jib-vBaucnvQpqe64WV6N_TqEKzeJ_7ncnssyH4Y-YnX';
 
     const payload = {
-        content: `@everyone\n**Minecraft Име:** ${minecraftName}\n**Награда:** ${prize}`
+        content: `<@1338505185332432967> <@1338506217428877525> <@1338506148726439988>\n**Minecraft Име:** ${minecraftName}\n**Награда:** ${prize}`
     };
 
     try {

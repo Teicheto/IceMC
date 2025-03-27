@@ -5,7 +5,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     const minecraftName = document.getElementById('minecraftName').value;
     const message = document.getElementById('message').value;
 
-     const webhookURL = 'https://discord.com/api/webhooks/1339618228011532430/ALCZreCT18Q5CTVUDISwIWt3jib-vBaucnvQpqe64WV6N_TqEKzeJ_7ncnssyH4Y-YnX';
+     const webhookURL = 'https://discord.com/api/webhooks/1352747220201508945/k6exWgkVh0C0HcspckOm3zuWNhyHG6FHOHP-idehtiOKyOYNpdjGJ_yqy5jjudG7U9LI';
 
      const payload = {
         content: `**Discord Name:** ${discordName}\n**Minecraft Name:** ${minecraftName}\n**Message:** ${message}`

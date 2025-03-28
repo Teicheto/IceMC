@@ -1,15 +1,24 @@
 async function fetchPlayers() {
     try {
-        let response = await fetch(`https://mcapi.us/server/status?ip=play.icemc.online`);
+        let response = await fetch(`https://api.mcsrvstat.us/2/play.icemc.online`);
         let data = await response.json();
+        
         if (data.online) {
-            document.getElementById("players-online").innerText = data.players.now;
+            document.getElementById("players-online").innerText = data.players.online;
         } else {
             document.getElementById("players-online").innerText = "Сървърът е офлайн";
         }
     } catch (error) {
         document.getElementById("players-online").innerText = "Грешка при зареждане";
     }
+}
+
+// Извикване на функцията при зареждане на страницата
+fetchPlayers();
+
+// Автоматично обновяване на всеки 30 секунди
+setInterval(fetchPlayers, 30000);
+
 }
 fetchPlayers();
 

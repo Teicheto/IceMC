@@ -53,3 +53,5 @@ document.getElementById("discord-online").innerText = "Няма информац
 
 // Извиква се при зареждане на страницата
 fetchDiscordMembers();
+
+document.body.style.cursor = "url('pickaxe.jpg'), auto";

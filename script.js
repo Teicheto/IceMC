@@ -23,3 +23,6 @@ docudocument.addEventListener("DOMContentLoaded", function() {
 
     setInterval(createStar, 300);
 });
+
+document.body.style.cursor = "url('pickaxe.jpg'), auto";
+

@@ -131,3 +131,5 @@ submitBtn.addEventListener('click', async () => {
 });
 
 checkSpinTime()
+
+document.body.style.cursor = "url('pickaxe.jpg'), auto";

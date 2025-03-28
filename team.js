@@ -29,3 +29,5 @@ document.getElementById('contactForm').addEventListener('submit', async function
         alert('Грешка при изпращане на съобщението.');
     }
 });
+
+document.body.style.cursor = "url('pickaxe.jpg'), auto";

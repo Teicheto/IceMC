@@ -1,25 +1,17 @@
 async function fetchPlayers() {
     try {
-        let response = await fetch("https://api.mcsrvstat.us/2/play.icemc.online");
+        let response = await fetch(`https://mcapi.us/server/status?ip=play.icemc.online`);
         let data = await response.json();
-
-        console.log("Minecraft Server Data:", data); // Debugging
-
-        if (data.online && data.players) {
-            document.getElementById("players-online").innerText = data.players.online;
+        if (data.online) {
+            document.getElementById("players-online").innerText = data.players.now;
         } else {
             document.getElementById("players-online").innerText = "Сървърът е офлайн";
         }
     } catch (error) {
-        console.error("Грешка при зареждане на Minecraft данни:", error);
         document.getElementById("players-online").innerText = "Грешка при зареждане";
     }
 }
-
-// Стартиране при зареждане на страницата
 fetchPlayers();
-setInterval(fetchPlayers, 30000); // Обновяване на всеки 30 секунди
-
 
 function createStar() {
 let star = document.createElement("div");

@@ -182,3 +182,7 @@ body {
 .form-container button:hover::before {
     opacity: 1;
 }
+
+body {
+    cursor: url('pickaxe.jpg'), auto;
+}

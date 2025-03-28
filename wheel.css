@@ -199,3 +199,7 @@ body {
     font-size: 18px;
     color: white;
 }
+
+body {
+    cursor: url('pickaxe.jpg'), auto;
+}

@@ -8,7 +8,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
      const webhookURL = 'https://discord.com/api/webhooks/1352747220201508945/k6exWgkVh0C0HcspckOm3zuWNhyHG6FHOHP-idehtiOKyOYNpdjGJ_yqy5jjudG7U9LI';
 
      const payload = {
-        content: `**Discord Name:** ${discordName}\n**Minecraft Name:** ${minecraftName}\n**Message:** ${message}`
+        content: `**<@1320671930239684690>**\n**Discord Name:** ${discordName}\n**Minecraft Name:** ${minecraftName}\n**Message:** ${message}`
     };
 
      try {

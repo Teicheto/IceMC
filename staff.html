@@ -7,7 +7,6 @@
     <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <link rel="stylesheet" href="mainpage.css">
     <style>
-        /* Falling star animation */
         .falling-star {
             position: absolute;
             top: 0;
@@ -24,7 +23,6 @@
             }
         }
 
-        /* Custom cursor */
         body {
             cursor: url('pickaxe.jpg'), auto;
             display: flex;
@@ -32,9 +30,9 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            background-color: #1a1a1a;
         }
 
-        /* Login Form Styling */
         .login-container {
             background-color: rgba(0, 0, 0, 0.8);
             padding: 30px;
@@ -44,6 +42,7 @@
             max-width: 400px;
             text-align: center;
             color: white;
+            margin-top: 80px;
         }
 
         .login-container h1 {
@@ -85,21 +84,6 @@
             background-color: #45a049;
         }
 
-        .register-link {
-            margin-top: 20px;
-            color: #fff;
-        }
-
-        .register-link a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* Menu styling */
         .menu {
             position: fixed;
             top: 0;
@@ -108,6 +92,7 @@
             padding: 20px;
             text-align: center;
             background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
         }
 
         .menu a {
@@ -143,15 +128,11 @@
             </div>
             <button type="submit" class="login-btn">Вход</button>
         </form>
-        <div class="register-link">
-            <p>Нямате акаунт? <a href="#" id="showRegister">Регистрирайте се</a></p>
-        </div>
     </div>
 
     <script>
-        // Create falling star animation
         function createStar() {
-            let star = document.createElement("div");
+            const star = document.createElement("div");
             star.classList.add("falling-star");
             star.style.left = Math.random() * 100 + "vw";
             star.style.animationDuration = Math.random() * 3 + 2 + "s";
@@ -160,33 +141,40 @@
             setTimeout(() => { star.remove(); }, 5000);
         }
 
-        // Initialize falling stars
         document.addEventListener("DOMContentLoaded", function() {
             setInterval(createStar, 300);
+
+            if (localStorage.getItem('currentUser')) {
+                const menu = document.querySelector('.menu');
+                const logoutLink = document.createElement('a');
+                logoutLink.href = '#';
+                logoutLink.onclick = function() {
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'index.html';
+                };
+                logoutLink.textContent = 'Изход';
+                menu.appendChild(logoutLink);
+            }
         });
 
-        // Login form handling
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Get stored users
-            const users = JSON.parse(localStorage.getItem('staffUsers') || '{}');
+            // For demonstration, using a simple object to store staff credentials
+            const staffCredentials = {
+                'admin': 'admin123',
+                'staff': 'staff123'
+            };
 
-            // Check if user exists and password matches
-            if (users[username] && users[username] === password) {
+            if (staffCredentials[username] && staffCredentials[username] === password) {
+                localStorage.setItem('currentUser', username);
                 alert('Успешен вход!');
-                // Add your redirect or dashboard logic here
+                window.location.href = 'index.html';
             } else {
                 alert('Грешно потребителско име или парола!');
             }
-        });
-
-        // Register link handling
-        document.getElementById('showRegister').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = 'register.html';
         });
     </script>
 </body>

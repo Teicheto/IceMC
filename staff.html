@@ -1,112 +1,11 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
+    <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMc - Стаф Логин</title>
-    <link rel="icon" href="logo.jpg.jpg" type="image/png">
+    <title>Staff Login</title>
     <link rel="stylesheet" href="mainpage.css">
-    <style>
-        .falling-star {
-            position: absolute;
-            top: 0;
-            width: 2px;
-            height: 10px;
-            background-color: white;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        body {
-            cursor: url('pickaxe.jpg'), auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #1a1a1a;
-        }
-
-        .login-container {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            color: white;
-            margin-top: 80px;
-        }
-
-        .login-container h1 {
-            margin-bottom: 30px;
-            color: #fff;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .login-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: #45a049;
-        }
-
-        .menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #4CAF50;
-        }
-    </style>
 </head>
 <body>
     <div class="menu">
@@ -131,44 +30,14 @@
     </div>
 
     <script>
-        function createStar() {
-            const star = document.createElement("div");
-            star.classList.add("falling-star");
-            star.style.left = Math.random() * 100 + "vw";
-            star.style.animationDuration = Math.random() * 3 + 2 + "s";
-            document.body.appendChild(star);
-
-            setTimeout(() => { star.remove(); }, 5000);
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            setInterval(createStar, 300);
-
-            if (localStorage.getItem('currentUser')) {
-                const menu = document.querySelector('.menu');
-                const logoutLink = document.createElement('a');
-                logoutLink.href = '#';
-                logoutLink.onclick = function() {
-                    localStorage.removeItem('currentUser');
-                    window.location.href = 'index.html';
-                };
-                logoutLink.textContent = 'Изход';
-                menu.appendChild(logoutLink);
-            }
-        });
-
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // For demonstration, using a simple object to store staff credentials
-            const staffCredentials = {
-                'admin': 'admin123',
-                'staff': 'staff123'
-            };
+            const users = JSON.parse(localStorage.getItem('staffUsers') || '{}');
 
-            if (staffCredentials[username] && staffCredentials[username] === password) {
+            if (users[username] && users[username] === password) {
                 localStorage.setItem('currentUser', username);
                 alert('Успешен вход!');
                 window.location.href = 'index.html';

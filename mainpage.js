@@ -69,9 +69,9 @@ function copyIP() {
 // Set custom cursor
 document.body.style.cursor = "url('pickaxe.jpg'), auto";
 
-// Initialize functions on page load
-window.onload = function() {
+// Initialize functions when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
     fetchPlayers();
     fetchDiscordMembers();
     setInterval(createStar, 300);
-};
+});

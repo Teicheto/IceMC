@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMC Server</title>
+    <title>IceMC Сървър</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mainpage.css">
 </head>
@@ -11,67 +11,67 @@
     <div class="stars" id="stars"></div>
     
     <nav class="menu">
-        <a href="#home">Home</a>
-        <a href="#store">Store</a>
-        <a href="#rules">Rules</a>
-        <a href="#staff">Staff</a>
-        <a href="#discord">Discord</a>
+        <a href="#home">Начало</a>
+        <a href="https://icemc69.craftingstore.net/">Магазин</a>
+        <a href="rules.html">Правила</a>
+        <a href="#staff">Екип</a>
+        <a href="https://discord.gg/ABNscSS5wW">Discord</a>
     </nav>
 
     <div class="container">
         <div class="server-info">
-            <h1>Welcome to IceMC</h1>
-            <p>Join the coolest Minecraft server experience!</p>
+            <h1>Добре дошли в IceMC</h1>
+            <p>Присъединете се към най-якото Minecraft сървър изживяване!</p>
             <div class="server-details">
-                <h2>Server IP: play.icemc.com</h2>
-                <button class="btn" onclick="copyIP()">Copy IP</button>
-                <p>Supported Versions: 1.19 - 1.21.5</p>
+                <h2>Сървър IP: play.icemc.com</h2>
+                <button class="btn" onclick="copyIP()">Копирай IP</button>
+                <p>Поддържани версии: 1.19 - 1.21.5</p>
             </div>
         </div>
 
         <div class="content">
             <div class="news">
-                <h2>Latest News</h2>
+                <h2>Последни новини</h2>
                 <div class="news-section">
-                    <h3>Server Update</h3>
-                    <p>We now support Minecraft 1.21.5!</p>
+                    <h3>Актуализация на сървъра</h3>
+                    <p>Вече поддържаме Minecraft 1.21.5!</p>
                 </div>
                 <div class="news-section">
-                    <h3>Weekend Event</h3>
-                    <p>Double XP this weekend!</p>
+                    <h3>Уикенд събитие</h3>
+                    <p>Двоен XP този уикенд!</p>
                 </div>
             </div>
 
             <div class="sidebar">
-                <h2>Online Players</h2>
+                <h2>Онлайн играчи</h2>
                 <div id="player-count">
-                    <p>Currently Online: <span id="online-players">0</span></p>
+                    <p>Текущо онлайн: <span id="online-players">0</span></p>
                 </div>
             </div>
         </div>
 
         <div class="staff">
             <div class="staff-member">
-                <img src="admin1.jpg" alt="Admin 1">
+                <img src="admin1.jpg" alt="Админ 1">
                 <h3>AdminName1</h3>
-                <p>Owner</p>
+                <p>Собственик</p>
             </div>
             <div class="staff-member">
-                <img src="admin2.jpg" alt="Admin 2">
+                <img src="admin2.jpg" alt="Админ 2">
                 <h3>AdminName2</h3>
-                <p>Moderator</p>
+                <p>Модератор</p>
             </div>
             <div class="staff-member">
-                <img src="admin3.jpg" alt="Admin 3">
+                <img src="admin3.jpg" alt="Админ 3">
                 <h3>AdminName3</h3>
-                <p>Helper</p>
+                <p>Помощник</p>
             </div>
         </div>
 
         <div class="discord-section">
-            <h2>Join our Discord Community!</h2>
-            <p>Stay updated and chat with other players</p>
-            <a href="https://discord.gg/yourserver" class="discord-btn">Join Discord</a>
+            <h2>Присъединете се към нашата Discord общност!</h2>
+            <p>Бъдете в течение и чатете с други играчи</p>
+            <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
         </div>
     </div>
 
@@ -91,8 +91,8 @@
 
         // Copy IP function
         function copyIP() {
-            navigator.clipboard.writeText('play.icemc.online');
-            alert('Server IP copied to clipboard!');
+            navigator.clipboard.writeText('play.icemc.com');
+            alert('Сървър IP е копиран в клипборда!');
         }
 
         // Initialize stars on load

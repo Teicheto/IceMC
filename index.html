@@ -56,26 +56,6 @@
             <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
         </div>
 
-        <div id="spin-wheel-container">
-            <h2>Спин Уил</h2>
-            <iframe src="wheel.html" width="100%" height="500px"></iframe>
-        </div>
-    </div>
-
-    <script src="wheel.js"></script>
-    <script>
-        // Create animated stars background
-        function createStars() {
-            const stars = document.getElementById('stars');
-            for(let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 2}s`;
-                stars.appendChild(star);
-            }
-        }
 
         // Copy IP function
         function copyIP() {
@@ -101,7 +81,7 @@
         window.onload = () => {
             createStars();
             fetchPlayers();
-            setInterval(fetchPlayers, 60000); // Update every 60 seconds
+            setInterval(fetchPlayers, 30000); // Update every 60 seconds
         };
     </script>
 </body>

@@ -1,6 +1,6 @@
 async function fetchPlayers() {
     try {
-        let response = await fetch(`https://mcsrvstat.us/server/play.icemc.online`);
+        let response = await fetch(`https://api.mcsrvstat.us/3/play.icemc.online`);
         let data = await response.json();
         if (data.online) {
             document.getElementById("players-online").innerText = data.players.now;

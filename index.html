@@ -5,7 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceMc</title>
-    <link rel="stylesheet" href="mainpage.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #1a1a2e);
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+        .menu {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .greeting {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            margin-top: 100px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stars {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            animation: starfall linear infinite;
+        }
+
+        @keyframes starfall {
+            from { transform: translateY(-100vh); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
 </head>
 <body>
     <div class="menu">
@@ -16,36 +78,37 @@
         <a href="staff.html">Стаф</a>
     </div>
 
-    <div style="position: fixed; top: 80px; left: 20px; color: white; font-size: 18px; background-color: rgba(0, 0, 0, 0.8); padding: 10px; border-radius: 5px;" id="userGreeting">
+    <div class="greeting" id="userGreeting"></div>
+
+    <div class="content">
+        <h1>Welcome to IceMc</h1>
+        <!-- Add your main content here -->
     </div>
 
     <script>
+        // Create falling stars effect
+        function createStar() {
+            const star = document.createElement('div');
+            star.className = 'stars';
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 5000);
+        }
+
+        setInterval(createStar, 200);
+
         function updateUserGreeting() {
             const currentUser = localStorage.getItem('currentUser');
             const greetingElement = document.getElementById('userGreeting');
             if (currentUser) {
-                greetingElement.textContent = `Hello, ${currentUser}`;
-                // Add password reset button for staff
-                const resetButton = document.createElement('a');
-                resetButton.href = 'menu.html';
-                resetButton.textContent = 'Reset Password';
-                resetButton.style.position = 'fixed';
-                resetButton.style.bottom = '20px';
-                resetButton.style.right = '20px';
-                resetButton.style.padding = '10px 20px';
-                resetButton.style.backgroundColor = '#4CAF50';
-                resetButton.style.color = 'white';
-                resetButton.style.textDecoration = 'none';
-                resetButton.style.borderRadius = '5px';
-                document.body.appendChild(resetButton);
+                greetingElement.textContent = `Welcome back, ${currentUser}!`;
             } else {
-                greetingElement.textContent = 'Hello, Guest';
+                greetingElement.textContent = 'Welcome, Guest!';
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            updateUserGreeting();
-        });
+        document.addEventListener("DOMContentLoaded", updateUserGreeting);
     </script>
 </body>
 </html>

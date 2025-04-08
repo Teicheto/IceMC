@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceMc</title>
+    <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <link rel="stylesheet" href="mainpage.css">
+    <style>
+        /* Falling star animation */
+        .falling-star {
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 10px;
+            background-color: white;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Custom cursor */
+        body {
+            cursor: url('pickaxe.jpg'), auto;
+        }
+    </style>
 </head>
 <body>
     <div class="menu">
@@ -18,68 +41,118 @@
         <div class="server-info">
             <h1 class="pulse-text">IceMc</h1>
             <p>Най-добрият Minecraft сървър в България!</p>
-            <p>IP: <strong>play.icemc.online</icemc></strong></p>
+            <p>IP: <strong>play.icemc.online</strong></p>
             <p>Активни играчи: <span id="players-online">Зареждане...</span></p>
             <button class="btn" onclick="copyIP()">Копирай IP</button>
         </div>
-            <div class="sidebar">
-                <div class="discord-section">
-                    <h2>IceMc</h2>
-                    <p>Онлайн в Discord: <span id="discord-online">Зареждане...</span></p>
-                    <a href="https://discord.gg/UEQytBkrCA" target="_blank" class="discord-btn">Присъедини се</a>
-                </div>
-                <h2>Топ 3 Staff</h2>
-                <div class="staff">
-                    <div class="staff-member">
-                        <img src="CargoVrum.png" alt="Staff 1">
-                        <p>№ 1</p>
-                        <p>_816k</p>
-                    </div>
-                    <div class="staff-member">
-                        <img src="Teicheto.png" alt="Staff 2">
-                        <p>№ 2</p>
-                        <p>Teicheto</p>
-                    </div>
-                    <div class="staff-member">
-                        <img src="CargoVrum.png" alt="Staff 3">
-                        <p>№ 3</p>
-                        <p>CargoVrum_<p>
-                    </div>
-                    <div class="news-section">
-                        <h1>Новини</h1>
-                        <div class="new">
-                            <h2>Новият сайт на IceMc</h2>
-                            <p>екипа на IceMc разработи чисто нов и красив сайт.Този сайт се правише в продължение на седмици преди да го видите</p>
-                        </div>
-                    </div>
-                </div>                
+        <div class="sidebar">
+            <div class="discord-section">
+                <h2>IceMc</h2>
+                <p>Онлайн в Discord: <span id="discord-online">Зареждане...</span></p>
+                <a href="https://discord.gg/UEQytBkrCA" target="_blank" class="discord-btn">Присъедини се</a>
             </div>
-        <script src="mainpage.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const starContainer = document.createElement("div");
-                starContainer.classList.add("stars");
-                document.body.appendChild(starContainer);
-        
-                for (let i = 0; i < 150; i++) { 
-                    let star = document.createElement("div");
-                    star.classList.add("star");
-                    let x = Math.random() * window.innerWidth;
-                    let y = Math.random() * window.innerHeight;
-                    let duration = Math.random() * 1.5 + 1;
-                    let size = Math.random() * 3 + 1;
-        
-                    star.style.left = `${x}px`;
-                    star.style.top = `${y}px`;
-                    star.style.width = `${size}px`;
-                    star.style.height = `${size}px`;
-                    star.style.animationDuration = `${duration}s`;
-        
-                    starContainer.appendChild(star);
+            <h2>Топ 3 Staff</h2>
+            <div class="staff">
+                <div class="staff-member">
+                    <img src="CargoVrum.png" alt="Staff 1">
+                    <p>№ 1</p>
+                    <p>_816k</p>
+                </div>
+                <div class="staff-member">
+                    <img src="Teicheto.png" alt="Staff 2">
+                    <p>№ 2</p>
+                    <p>Teicheto</p>
+                </div>
+                <div class="staff-member">
+                    <img src="CargoVrum.png" alt="Staff 3">
+                    <p>№ 3</p>
+                    <p>CargoVrum_</p>
+                </div>
+            </div>
+            <div class="news-section">
+                <h1>Новини</h1>
+                <div class="new">
+                    <h2>Новият сайт на IceMc</h2>
+                    <p>Екипът на IceMc разработи чисто нов и красив сайт. Този сайт се правеше в продължение на седмици преди да го видите.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Fetch Minecraft server player count
+        async function fetchPlayers() {
+            const serverAddress = 'play.icemc.online';
+            const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'User-Agent': 'IceMC/1.0' // Replace with your application's name and version
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
+
+                const data = await response.json();
+
+                const playersOnlineElement = document.getElementById("players-online");
+                if (data.online) {
+                    playersOnlineElement.innerText = `Активни играчи: ${data.players.online}`;
+                } else {
+                    playersOnlineElement.innerText = "Сървърът е офлайн";
+                }
+            } catch (error) {
+                console.error("Грешка при извличане на данни за играчите:", error);
+                document.getElementById("players-online").innerText = "Грешка при зареждане";
+            }
+        }
+
+        // Fetch Discord server member count
+        async function fetchDiscordMembers() {
+            const guildId = "1320671930239684690"; // Replace with your Discord Guild ID
+            const widgetUrl = `https://discord.com/api/guilds/${guildId}/widget.json`;
+
+            try {
+                const response = await fetch(widgetUrl);
+                if (!response.ok) throw new Error("Грешка при взимане на данни!");
+
+                const data = await response.json();
+                document.getElementById("discord-online").innerText = `Онлайн в Discord: ${data.presence_count}`;
+            } catch (error) {
+                console.error("Грешка при извличане на данни от Discord:", error);
+                document.getElementById("discord-online").innerText = "Няма информация";
+            }
+        }
+
+        // Create falling star animation
+        function createStar() {
+            let star = document.createElement("div");
+            star.classList.add("falling-star");
+            star.style.left = Math.random() * 100 + "vw";
+            star.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(star);
+
+            setTimeout(() => { star.remove(); }, 5000);
+        }
+
+        // Copy server IP to clipboard
+        function copyIP() {
+            const ip = "play.icemc.online"; // Your server IP
+            navigator.clipboard.writeText(ip).then(() => {
+                alert("IP адресът е копиран: " + ip);
+            }).catch(err => {
+                console.error("Грешка при копиране: ", err);
             });
-        </script>
-        
-    </body>
-    </html>
-    
+        }
+
+        // Initialize functions on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchPlayers();
+            fetchDiscordMembers();
+            setInterval(createStar, 300);
+        });
+    </script>
+</body>
+</html>

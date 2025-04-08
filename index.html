@@ -1,83 +1,102 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DELTA | Community</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    <title>IceMC Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="your-css-file.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>DELTA | Community</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">За нас</a></li>
-                    <li><a href="#features">Защо да изберете нас?</a></li>
-                    <li><a href="#services">Какво предлагаме</a></li>
-                    <li><a href="#contact">Контакти</a></li>
-                </ul>
-            </nav>
+    <div class="stars" id="stars"></div>
+    
+    <nav class="menu">
+        <a href="#home">Home</a>
+        <a href="#store">Store</a>
+        <a href="#rules">Rules</a>
+        <a href="#staff">Staff</a>
+        <a href="#discord">Discord</a>
+    </nav>
+
+    <div class="container">
+        <div class="server-info">
+            <h1>Welcome to IceMC</h1>
+            <p>Join the coolest Minecraft server experience!</p>
+            <div class="server-details">
+                <h2>Server IP: play.icemc.com</h2>
+                <button class="btn" onclick="copyIP()">Copy IP</button>
+                <p>Supported Versions: 1.19 - 1.21.5</p>
+            </div>
         </div>
-    </header>
-    <main>
-        <section id="hero">
-            <div class="container">
-                <h2>Добре дошли в DELTA | Community</h2>
-                <p>DeltaMC е една от най-големите общности в България, обединяваща ентусиасти и любители на Minecraft.</p>
-                <a href="https://discord.gg/yourdiscordlink" class="cta-button">Присъедини се към нас в Discord</a>
+
+        <div class="content">
+            <div class="news">
+                <h2>Latest News</h2>
+                <div class="news-section">
+                    <h3>Server Update</h3>
+                    <p>We now support Minecraft 1.21.5!</p>
+                </div>
+                <div class="news-section">
+                    <h3>Weekend Event</h3>
+                    <p>Double XP this weekend!</p>
+                </div>
             </div>
-        </section>
-        <section id="about" class="info-section">
-            <div class="container">
-                <h2>За нас</h2>
-                <p>Предлагаме 24/7 сървър на версия 1.21, достъпен както за купена, така и за кракната версия. При нас ще намерите много любезни и дружелюбни играчи, с които може би ще започнете едно дълго приятелство.</p>
+
+            <div class="sidebar">
+                <h2>Online Players</h2>
+                <div id="player-count">
+                    <p>Currently Online: <span id="online-players">0</span></p>
+                </div>
             </div>
-        </section>
-        <section id="features" class="info-section">
-            <div class="container">
-                <h2>Защо да изберете нас?</h2>
-                <ul>
-                    <li><strong>Бърза поддръжка:</strong> Нашият отделен екип е тук, за да ви помогне с всякакви проблеми или въпроси.</li>
-                    <li><strong>Глобално покритие:</strong> Със сървъри на 3 различни места, можете да изберете този, който най-добре отговаря на вашите нужди.</li>
-                    <li><strong>Големи отстъпки:</strong> Насладете се на нашите редовни огромни отстъпки за всички услуги и пакети за игрален хостинг.</li>
-                    <li><strong>Защитен достъп:</strong> Предлагаме SFTP достъп, гарантиращ най-високо ниво на сигурност за вашите игрални файлове.</li>
-                    <li><strong>Root достъп:</strong> Вземете контрол над вашите VPS услуги с пълен root достъп.</li>
-                    <li><strong>Защита срещу DDoS атаки:</strong> Гарантирано 99.9% uptime с мисъл за сигурност.</li>
-                </ul>
-            </div>
-        </section>
-        <section id="services" class="info-section">
-            <div class="container">
-                <h2>Какво предлагаме</h2>
-                <ul>
-                    <li><strong>🎮</strong> Над 20 игри за хостинг на сървъри</li>
-                    <li><strong>🚀</strong> Виртуални частни сървъри</li>
-                    <li><strong>🌐</strong> Уеб хостинг</li>
-                    <li><strong>🤖</strong> Хостинг на Discord ботове</li>
-                    <li><strong>🧩</strong> Услуги за разработка</li>
-                    <li><strong>🎨</strong> Услуги за дизайн</li>
-                </ul>
-            </div>
-        </section>
-        <section id="contact" class="info-section">
-            <div class="container">
-                <h2>За връзка с нас</h2>
-                <p>При проблем с поръчка се обърнете към support отдела в нашия Discord сървър, като отворите Ticket или на <a href="mailto:support@deltamcbg.com">support@deltamcbg.com</a>.</p>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 DELTA | Community - Всички права запазени.</p>
-            <nav>
-                <ul>
-                    <li><a href="#terms">Условия за ползване</a></li>
-                    <li><a href="#privacy">Поверителност</a></li>
-                </ul>
-            </nav>
         </div>
-    </footer>
+
+        <div class="staff">
+            <div class="staff-member">
+                <img src="admin1.jpg" alt="Admin 1">
+                <h3>AdminName1</h3>
+                <p>Owner</p>
+            </div>
+            <div class="staff-member">
+                <img src="admin2.jpg" alt="Admin 2">
+                <h3>AdminName2</h3>
+                <p>Moderator</p>
+            </div>
+            <div class="staff-member">
+                <img src="admin3.jpg" alt="Admin 3">
+                <h3>AdminName3</h3>
+                <p>Helper</p>
+            </div>
+        </div>
+
+        <div class="discord-section">
+            <h2>Join our Discord Community!</h2>
+            <p>Stay updated and chat with other players</p>
+            <a href="https://discord.gg/yourserver" class="discord-btn">Join Discord</a>
+        </div>
+    </div>
+
+    <script>
+        // Create animated stars background
+        function createStars() {
+            const stars = document.getElementById('stars');
+            for(let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                stars.appendChild(star);
+            }
+        }
+
+        // Copy IP function
+        function copyIP() {
+            navigator.clipboard.writeText('play.icemc.online');
+            alert('Server IP copied to clipboard!');
+        }
+
+        // Initialize stars on load
+        window.onload = createStars;
+    </script>
 </body>
 </html>

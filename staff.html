@@ -7,7 +7,7 @@
     <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <link rel="stylesheet" href="mainpage.css">
     <style>
-        /* Falling star animation (keeping the same background effect) */
+        /* Falling star animation */
         .falling-star {
             position: absolute;
             top: 0;
@@ -99,7 +99,7 @@
             text-decoration: underline;
         }
 
-        /* Menu styling (keeping the same menu) */
+        /* Menu styling */
         .menu {
             position: fixed;
             top: 0;
@@ -149,7 +149,7 @@
     </div>
 
     <script>
-        // Create falling star animation (keeping the same background effect)
+        // Create falling star animation
         function createStar() {
             let star = document.createElement("div");
             star.classList.add("falling-star");
@@ -165,20 +165,28 @@
             setInterval(createStar, 300);
         });
 
-        // Login form submission
+        // Login form handling
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            // Here you'll add the login logic
-            console.log('Login attempt:', username);
+
+            // Get stored users
+            const users = JSON.parse(localStorage.getItem('staffUsers') || '{}');
+
+            // Check if user exists and password matches
+            if (users[username] && users[username] === password) {
+                alert('Успешен вход!');
+                // Add your redirect or dashboard logic here
+            } else {
+                alert('Грешно потребителско име или парола!');
+            }
         });
 
-        // Show registration form (to be implemented)
+        // Register link handling
         document.getElementById('showRegister').addEventListener('click', function(e) {
             e.preventDefault();
-            // Here you'll add the logic to show registration form
-            alert('Регистрационната форма ще бъде достъпна скоро!');
+            window.location.href = 'register.html';
         });
     </script>
 </body>

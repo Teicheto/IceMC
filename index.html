@@ -3,153 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMc - Начало</title>
-    <link rel="icon" href="logo.jpg.jpg" type="image/png">
-    <link rel="stylesheet" href="mainpage.css">
-    <style>
-        /* Keeping all your existing styles */
-        .falling-star {
-            position: absolute;
-            top: 0;
-            width: 2px;
-            height: 10px;
-            background-color: white;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        body {
-            cursor: url('pickaxe.jpg'), auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        /* Modified container for main page content */
-        .main-container {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            color: white;
-        }
-
-        .main-container h1 {
-            margin-bottom: 30px;
-            color: #fff;
-            font-size: 2.5em;
-        }
-
-        .server-info {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .server-status {
-            margin: 20px 0;
-            font-size: 1.2em;
-        }
-
-        .join-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            margin: 20px 0;
-        }
-
-        .join-btn:hover {
-            background-color: #45a049;
-        }
-
-        /* Keeping your existing menu styling */
-        .menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #4CAF50;
-        }
-    </style>
+    <title>DELTA | Community</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <div class="menu">
-        <a href="index.html">Начало</a>
-        <a href="https://icemc69.craftingstore.net" target="_blank">Магазин</a>
-        <a href="wheel.html">Колело на късмета</a>
-        <a href="team.html">Екип</a>
-        <a href="staff.html">Стаф</a>
-    </div>
-
-    <div class="main-container">
-        <h1>Добре дошли в IceMc</h1>
-        <div class="server-info">
-            <h2>Нашият Minecraft Сървър</h2>
-            <p>Присъединете се към най-добрата Minecraft общност в България!</p>
-            <div class="server-status">
-                <p>IP: play.icemc.bg</p>
-                <p>Версия: 1.8 - 1.20</p>
+    <header>
+        <div class="container">
+            <h1>DELTA | Community</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">За нас</a></li>
+                    <li><a href="#features">Защо да изберете нас?</a></li>
+                    <li><a href="#services">Какво предлагаме</a></li>
+                    <li><a href="#contact">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Добре дошли в DELTA | Community</h2>
+                <p>DeltaMC е една от най-големите общности в България, обединяваща ентусиасти и любители на Minecraft.</p>
+                <a href="https://discord.gg/yourdiscordlink" class="cta-button">Присъедини се към нас в Discord</a>
             </div>
-            <a href="minecraft://connect/play.icemc.bg" class="join-btn">Влез в сървъра</a>
+        </section>
+        <section id="about" class="info-section">
+            <div class="container">
+                <h2>За нас</h2>
+                <p>Предлагаме 24/7 сървър на версия 1.21, достъпен както за купена, така и за кракната версия. При нас ще намерите много любезни и дружелюбни играчи, с които може би ще започнете едно дълго приятелство.</p>
+            </div>
+        </section>
+        <section id="features" class="info-section">
+            <div class="container">
+                <h2>Защо да изберете нас?</h2>
+                <ul>
+                    <li><strong>Бърза поддръжка:</strong> Нашият отделен екип е тук, за да ви помогне с всякакви проблеми или въпроси.</li>
+                    <li><strong>Глобално покритие:</strong> Със сървъри на 3 различни места, можете да изберете този, който най-добре отговаря на вашите нужди.</li>
+                    <li><strong>Големи отстъпки:</strong> Насладете се на нашите редовни огромни отстъпки за всички услуги и пакети за игрален хостинг.</li>
+                    <li><strong>Защитен достъп:</strong> Предлагаме SFTP достъп, гарантиращ най-високо ниво на сигурност за вашите игрални файлове.</li>
+                    <li><strong>Root достъп:</strong> Вземете контрол над вашите VPS услуги с пълен root достъп.</li>
+                    <li><strong>Защита срещу DDoS атаки:</strong> Гарантирано 99.9% uptime с мисъл за сигурност.</li>
+                </ul>
+            </div>
+        </section>
+        <section id="services" class="info-section">
+            <div class="container">
+                <h2>Какво предлагаме</h2>
+                <ul>
+                    <li><strong>🎮</strong> Над 20 игри за хостинг на сървъри</li>
+                    <li><strong>🚀</strong> Виртуални частни сървъри</li>
+                    <li><strong>🌐</strong> Уеб хостинг</li>
+                    <li><strong>🤖</strong> Хостинг на Discord ботове</li>
+                    <li><strong>🧩</strong> Услуги за разработка</li>
+                    <li><strong>🎨</strong> Услуги за дизайн</li>
+                </ul>
+            </div>
+        </section>
+        <section id="contact" class="info-section">
+            <div class="container">
+                <h2>За връзка с нас</h2>
+                <p>При проблем с поръчка се обърнете към support отдела в нашия Discord сървър, като отворите Ticket или на <a href="mailto:support@deltamcbg.com">support@deltamcbg.com</a>.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DELTA | Community - Всички права запазени.</p>
+            <nav>
+                <ul>
+                    <li><a href="#terms">Условия за ползване</a></li>
+                    <li><a href="#privacy">Поверителност</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="features">
-            <h3>Какво предлагаме:</h3>
-            <p>✦ Уникални режими</p>
-            <p>✦ Страхотна общност</p>
-            <p>✦ Редовни събития</p>
-            <p>✦ Активен стаф</p>
-        </div>
-    </div>
-
-    <script>
-        // Keeping your falling star animation
-        function createStar() {
-            let star = document.createElement("div");
-            star.classList.add("falling-star");
-            star.style.left = Math.random() * 100 + "vw";
-            star.style.animationDuration = Math.random() * 3 + 2 + "s";
-            document.body.appendChild(star);
-
-            setTimeout(() => { star.remove(); }, 5000);
-        }
-
-        // Initialize falling stars
-        document.addEventListener("DOMContentLoaded", function() {
-            setInterval(createStar, 300);
-        });
-    </script>
+    </footer>
 </body>
 </html>

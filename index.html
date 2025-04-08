@@ -1,78 +1,11 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
+    <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMc - Начало</title>
-    <link rel="icon" href="logo.jpg.jpg" type="image/png">
+    <title>IceMc</title>
     <link rel="stylesheet" href="mainpage.css">
-    <style>
-        .falling-star {
-            position: absolute;
-            top: 0;
-            width: 2px;
-            height: 10px;
-            background-color: white;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        body {
-            cursor: url('pickaxe.jpg'), auto;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background-color: #1a1a1a;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        .menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #4CAF50;
-        }
-
-        .user-greeting {
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            color: white;
-            font-size: 18px;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-
-        .content {
-            padding-top: 100px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <div class="menu">
@@ -83,48 +16,35 @@
         <a href="staff.html">Стаф</a>
     </div>
 
-    <div class="user-greeting" id="userGreeting"></div>
-
-    <div class="content">
-        <!-- Add your main page content here -->
+    <div style="position: fixed; top: 80px; left: 20px; color: white; font-size: 18px; background-color: rgba(0, 0, 0, 0.8); padding: 10px; border-radius: 5px;" id="userGreeting">
     </div>
 
     <script>
-        function createStar() {
-            const star = document.createElement("div");
-            star.classList.add("falling-star");
-            star.style.left = Math.random() * 100 + "vw";
-            star.style.animationDuration = Math.random() * 3 + 2 + "s";
-            document.body.appendChild(star);
-
-            setTimeout(() => { star.remove(); }, 5000);
-        }
-
         function updateUserGreeting() {
             const currentUser = localStorage.getItem('currentUser');
             const greetingElement = document.getElementById('userGreeting');
             if (currentUser) {
                 greetingElement.textContent = `Hello, ${currentUser}`;
+                // Add password reset button for staff
+                const resetButton = document.createElement('a');
+                resetButton.href = 'menu.html';
+                resetButton.textContent = 'Reset Password';
+                resetButton.style.position = 'fixed';
+                resetButton.style.bottom = '20px';
+                resetButton.style.right = '20px';
+                resetButton.style.padding = '10px 20px';
+                resetButton.style.backgroundColor = '#4CAF50';
+                resetButton.style.color = 'white';
+                resetButton.style.textDecoration = 'none';
+                resetButton.style.borderRadius = '5px';
+                document.body.appendChild(resetButton);
             } else {
                 greetingElement.textContent = 'Hello, Guest';
             }
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            setInterval(createStar, 300);
             updateUserGreeting();
-
-            if (localStorage.getItem('currentUser')) {
-                const menu = document.querySelector('.menu');
-                const logoutLink = document.createElement('a');
-                logoutLink.href = '#';
-                logoutLink.onclick = function() {
-                    localStorage.removeItem('currentUser');
-                    window.location.reload();
-                };
-                logoutLink.textContent = 'Изход';
-                menu.appendChild(logoutLink);
-            }
         });
     </script>
 </body>

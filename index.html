@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMc - Стаф Логин</title>
+    <title>IceMc - Начало</title>
     <link rel="icon" href="logo.jpg.jpg" type="image/png">
     <link rel="stylesheet" href="mainpage.css">
     <style>
-        /* Falling star animation (keeping the same background effect) */
+        /* Keeping all your existing styles */
         .falling-star {
             position: absolute;
             top: 0;
@@ -24,7 +24,6 @@
             }
         }
 
-        /* Custom cursor */
         body {
             cursor: url('pickaxe.jpg'), auto;
             display: flex;
@@ -34,72 +33,55 @@
             margin: 0;
         }
 
-        /* Login Form Styling */
-        .login-container {
+        /* Modified container for main page content */
+        .main-container {
             background-color: rgba(0, 0, 0, 0.8);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 400px;
+            max-width: 800px;
             text-align: center;
             color: white;
         }
 
-        .login-container h1 {
+        .main-container h1 {
             margin-bottom: 30px;
             color: #fff;
+            font-size: 2.5em;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
+        .server-info {
+            margin: 20px 0;
+            padding: 20px;
             background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
-            margin-top: 5px;
+            border-radius: 10px;
         }
 
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        .server-status {
+            margin: 20px 0;
+            font-size: 1.2em;
         }
 
-        .login-btn {
+        .join-btn {
             background-color: #4CAF50;
             color: white;
-            padding: 12px 30px;
+            padding: 15px 40px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
         }
 
-        .login-btn:hover {
+        .join-btn:hover {
             background-color: #45a049;
         }
 
-        .register-link {
-            margin-top: 20px;
-            color: #fff;
-        }
-
-        .register-link a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* Menu styling (keeping the same menu) */
+        /* Keeping your existing menu styling */
         .menu {
             position: fixed;
             top: 0;
@@ -132,24 +114,28 @@
         <a href="staff.html">Стаф</a>
     </div>
 
-    <div class="login-container">
-        <h1>Стаф Логин</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <input type="text" id="username" placeholder="Потребителско име" required>
+    <div class="main-container">
+        <h1>Добре дошли в IceMc</h1>
+        <div class="server-info">
+            <h2>Нашият Minecraft Сървър</h2>
+            <p>Присъединете се към най-добрата Minecraft общност в България!</p>
+            <div class="server-status">
+                <p>IP: play.icemc.bg</p>
+                <p>Версия: 1.8 - 1.20</p>
             </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder="Парола" required>
-            </div>
-            <button type="submit" class="login-btn">Вход</button>
-        </form>
-        <div class="register-link">
-            <p>Нямате акаунт? <a href="#" id="showRegister">Регистрирайте се</a></p>
+            <a href="minecraft://connect/play.icemc.bg" class="join-btn">Влез в сървъра</a>
+        </div>
+        <div class="features">
+            <h3>Какво предлагаме:</h3>
+            <p>✦ Уникални режими</p>
+            <p>✦ Страхотна общност</p>
+            <p>✦ Редовни събития</p>
+            <p>✦ Активен стаф</p>
         </div>
     </div>
 
     <script>
-        // Create falling star animation (keeping the same background effect)
+        // Keeping your falling star animation
         function createStar() {
             let star = document.createElement("div");
             star.classList.add("falling-star");
@@ -163,22 +149,6 @@
         // Initialize falling stars
         document.addEventListener("DOMContentLoaded", function() {
             setInterval(createStar, 300);
-        });
-
-        // Login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            // Here you'll add the login logic
-            console.log('Login attempt:', username);
-        });
-
-        // Show registration form (to be implemented)
-        document.getElementById('showRegister').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Here you'll add the logic to show registration form
-            alert('Регистрационната форма ще бъде достъпна скоро!');
         });
     </script>
 </body>

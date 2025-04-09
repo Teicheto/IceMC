@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <link rel="icon" href="logoo.jpg" type="image/png">
+    <link rel="icon" href="logo.jpg" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceMC Сървър</title>
@@ -33,7 +33,7 @@
             background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
             border-radius: 10px;
             margin-bottom: 20px;
-            position: relative;
+            text-align: center;
         }
         .btn {
             background: #ff9900;
@@ -65,23 +65,10 @@
             background: #5b6eae;
         }
         .logo {
-            width: 150px;
+            width: 120px;
             height: auto;
-            margin: 20px auto;
+            margin: 10px auto;
             display: block;
-        }
-        .side-logo {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: auto;
-        }
-        .side-logo.left {
-            left: -220px;
-        }
-        .side-logo.right {
-            right: -220px;
         }
     </style>
 </head>
@@ -97,21 +84,17 @@
     </nav>
 
     <div class="container">
-        <!-- Left Logo -->
-        <img src="logoo.jpg" alt="IceMC Logo" class="side-logo left">
-        
+        <!-- Add logo inside the welcome box -->
+        <img src="logo.jpg" alt="IceMC Logo" class="logo">
         <div class="server-info">
             <h1>Добре дошли в IceMC</h1>
             <p>Присъединете се към най-якото Minecraft сървър изживяване!</p>
             <div class="server-details">
-                <h2>Сървър IP: nl33.icehost.pl:25803</h2>
+                <h2>Сървър IP: icemc.site</h2>
                 <button class="btn" onclick="copyIP()">Копирай IP</button>
                 <p>Поддържани версии: 1.19 - 1.21.5</p>
             </div>
         </div>
-        
-        <!-- Right Logo -->
-        <img src="logoo.jpg" alt="IceMC Logo" class="side-logo right">
     </div>
 
     <div class="container">
@@ -131,10 +114,10 @@
             <div class="sidebar">
                 <h2>Онлайн играчи</h2>
                 <div id="player-count">
+                    <!-- Add logo inside the online players box -->
+                    <img src="logo.jpg" alt="IceMC Logo" class="logo">
                     <p>Текущо онлайн: <span id="online-players">0</span></p>
                 </div>
-                <!-- Below Online Players Section -->
-                <img src="logoo.jpg" alt="IceMC Logo" class="logo">
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <link rel="icon" href="logoo.png" type="image/png">
+    <link rel="icon" href="logoo.jpg" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceMC Сървър</title>
@@ -119,7 +119,7 @@
         // Create animated stars background
         function createStars() {
             const stars = document.getElementById('stars');
-            for(let i = 0; i < 100; i++) {
+            for (let i = 0; i < 100; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = `${Math.random() * 100}%`;
@@ -131,14 +131,14 @@
 
         // Copy IP function
         function copyIP() {
-            navigator.clipboard.writeText('play.icemc.online');
+            navigator.clipboard.writeText('play.icemc.com');
             alert('Сървър IP е копиран в клипборда!');
         }
 
-        // Fetch player count from server API and update the DOM
+        // Fetch player count from MCSrvStat.us API and update the DOM
         async function fetchPlayers() {
-            const serverAddress = 'play.icemc.online';
-            const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+            const serverAddress = 'play.icemc.com'; // Replace with your server's address
+            const apiUrl = `https://api.mcsrvstat.us/2/${serverAddress}`;
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
@@ -146,6 +146,7 @@
                 document.getElementById('online-players').textContent = playerCount;
             } catch (error) {
                 console.error('Error fetching player count:', error);
+                document.getElementById('online-players').textContent = 'N/A';
             }
         }
 

@@ -130,13 +130,13 @@
 
         // Copy IP function
         function copyIP() {
-            navigator.clipboard.writeText('play.icemc.com');
+            navigator.clipboard.writeText('play.icemc.online');
             alert('Сървър IP е копиран в клипборда!');
         }
 
         // Fetch player count from server API and update the DOM
         async function fetchPlayers() {
-            const serverAddress = 'play.icemc.com';
+            const serverAddress = 'play.icemc.online';
             const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
             try {
                 const response = await fetch(apiUrl);

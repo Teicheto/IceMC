@@ -33,6 +33,7 @@
             background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
             border-radius: 10px;
             margin-bottom: 20px;
+            position: relative;
         }
         .btn {
             background: #ff9900;
@@ -63,6 +64,25 @@
         .discord-btn:hover {
             background: #5b6eae;
         }
+        .logo {
+            width: 150px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+        .side-logo {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: auto;
+        }
+        .side-logo.left {
+            left: -220px;
+        }
+        .side-logo.right {
+            right: -220px;
+        }
     </style>
 </head>
 <body>
@@ -77,29 +97,34 @@
     </nav>
 
     <div class="container">
+        <!-- Left Logo -->
+        <img src="logoo.jpg" alt="IceMC Logo" class="side-logo left">
+        
         <div class="server-info">
             <h1>Добре дошли в IceMC</h1>
             <p>Присъединете се към най-якото Minecraft сървър изживяване!</p>
             <div class="server-details">
-                <h2>Сървър IP: play.icemc.online</h2>
+                <h2>Сървър IP: nl33.icehost.pl:25803</h2>
                 <button class="btn" onclick="copyIP()">Копирай IP</button>
-                <h3 style="color: #FFA500;">
-    Моля, <a href="https://minecraft-mp.com/server/340714/vote/" style="color: #FFA500; text-decoration: underline;">гласувайте тук</a>
-</h3>
                 <p>Поддържани версии: 1.19 - 1.21.5</p>
             </div>
         </div>
+        
+        <!-- Right Logo -->
+        <img src="logoo.jpg" alt="IceMC Logo" class="side-logo right">
+    </div>
 
+    <div class="container">
         <div class="content">
             <div class="news">
                 <h2>Последни новини</h2>
                 <div class="news-section">
                     <h3>Актуализация на сървъра</h3>
-                    <p>Вече поддържаме Minecraft 1.21.5!</p>
+                    <p>Вече поддържаме Minecraft 1.21.4!</p>
                 </div>
                 <div class="news-section">
                     <h3>Уикенд събитие</h3>
-                    <p>Всеки ден по 10К </p>
+                    <p>Двоен XP този уикенд!</p>
                 </div>
             </div>
 
@@ -108,14 +133,16 @@
                 <div id="player-count">
                     <p>Текущо онлайн: <span id="online-players">0</span></p>
                 </div>
+                <!-- Below Online Players Section -->
+                <img src="logoo.jpg" alt="IceMC Logo" class="logo">
             </div>
         </div>
+    </div>
 
-        <div class="discord-section">
-            <h2>Присъединете се към нашата Discord общност!</h2>
-            <p>Бъдете в течение и чатете с други играчи</p>
-            <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
-        </div>
+    <div class="discord-section">
+        <h2>Присъединете се към нашата Discord общност!</h2>
+        <p>Бъдете в течение и чатете с други играчи</p>
+        <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
     </div>
 
     <script>

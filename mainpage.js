@@ -1,7 +1,7 @@
 // Fetch Minecraft server player count
 async function fetchPlayers() {
     const serverAddress = 'play.icemc.online';
-    const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+    const apiUrl = `api.mcstatus.io/v2/status/java/${serverAddress}`;
 
     try {
         const response = await fetch(apiUrl, {

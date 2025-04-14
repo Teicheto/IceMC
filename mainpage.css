@@ -4,10 +4,13 @@ body {
     margin: 0;
     padding: 0;
     color: #fff;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background: linear-gradient(180deg, #1e3c72, #2a5298);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Header */
@@ -34,7 +37,7 @@ nav ul {
     margin: 1rem 0 0;
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 nav a {
@@ -58,7 +61,12 @@ nav a:hover {
 }
 
 .hero h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+}
+
+.hero .highlight {
+    color: #00d4ff;
+    font-weight: bold;
 }
 
 .hero .cta-button {
@@ -70,6 +78,7 @@ nav a:hover {
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
+    font-size: 1rem;
     transition: background 0.3s ease;
 }
 
@@ -79,47 +88,60 @@ nav a:hover {
 
 /* Features Section */
 .features {
+    padding: 3rem 1rem;
     text-align: center;
-    padding: 2rem 1rem;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
 }
 
 .features h2 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-item {
+    background: #ffffff1a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item img {
+    max-width: 100px;
     margin-bottom: 1rem;
 }
 
-.features ul {
-    list-style: none;
-    padding: 0;
-    font-size: 1.2rem;
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.features li {
-    margin: 0.5rem 0;
+.feature-item p {
+    font-size: 1rem;
 }
 
 /* Shop Section */
 .shop {
+    padding: 3rem 1rem;
     text-align: center;
-    padding: 2rem 1rem;
     background: linear-gradient(135deg, #2a5298, #1e3c72);
 }
 
-.shop h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
 .shop .cta-button {
-    display: inline-block;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     padding: 0.75rem 1.5rem;
     background: #00d4ff;
     color: #003580;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
+    font-size: 1rem;
     transition: background 0.3s ease;
 }
 

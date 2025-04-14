@@ -1,68 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMC - Home</title>
+    <title>IceMC - Сезон 5</title>
     <link rel="stylesheet" href="mainpage.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Welcome to <span>IceMC</span></h1>
+        <div class="navbar">
+            <div class="logo">
+                <h1>IceMC</h1>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="rules.html">Rules</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="https://icemc69.craftingstore.net/" target="_blank">Shop</a></li>
+                    <li><a href="index.html" class="active">Начало</a></li>
+                    <li><a href="rules.html">Правила</a></li>
+                    <li><a href="team.html">Екип</a></li>
+                    <li><a href="https://icemc69.craftingstore.net/" target="_blank">Магазин</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
+        <!-- Hero Section -->
         <section class="hero">
-            <div class="container">
-                <h2>Join IceMC NOW</h2>
-                <p>Server IP: <span class="highlight">play.icemc.online</span></p>
-                <a href="https://discord.gg/UEQytBkrCA" class="cta-button" target="_blank">Join Our Discord</a>
+            <div class="hero-container">
+                <div class="hero-text">
+                    <h2>IceMC | Сезон 5</h2>
+                    <p>Присъединете се към нашето невероятно Minecraft приключение с новия сезон!</p>
+                    <p><span class="highlight">IP:</span> play.icemc.online</p>
+                    <a href="https://discord.gg/UEQytBkrCA" class="cta-button" target="_blank">Присъединете се към нашия Discord</a>
+                </div>
+                <div class="hero-image">
+                    <img src="images/icemc-season5-banner.png" alt="IceMC Season 5 Banner">
+                </div>
             </div>
         </section>
+        <!-- Features Section -->
         <section class="features">
             <div class="container">
-                <h2>Features</h2>
+                <h2>Какво е новото в Сезон 5?</h2>
                 <div class="features-grid">
                     <div class="feature-item">
-                        <img src="images/custom-plugins.png" alt="Custom Plugins">
-                        <h3>Custom Plugins</h3>
-                        <p>Unique gameplay tailored for our community.</p>
+                        <img src="images/custom-plugins.png" alt="Персонализирани плъгини">
+                        <h3>Персонализирани плъгини</h3>
+                        <p>Нови функции и подобрения за уникален геймплей.</p>
                     </div>
                     <div class="feature-item">
-                        <img src="images/community.png" alt="Friendly Community">
-                        <h3>Friendly Community</h3>
-                        <p>Make friends and enjoy the game together.</p>
+                        <img src="images/community.png" alt="Приятелска общност">
+                        <h3>Приятелска общност</h3>
+                        <p>Създайте нови приятелства и се забавлявайте заедно.</p>
                     </div>
                     <div class="feature-item">
-                        <img src="images/events.png" alt="Competitive Events">
-                        <h3>Competitive Events</h3>
-                        <p>Participate in exciting events and win rewards.</p>
+                        <img src="images/events.png" alt="Състезания и награди">
+                        <h3>Състезания и награди</h3>
+                        <p>Участвайте в нови събития и спечелете невероятни награди.</p>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="shop">
+        <!-- News Section -->
+        <section class="news">
             <div class="container">
-                <h2>Support Us</h2>
-                <p>Visit our shop to get exclusive perks and support the server:</p>
-                <a href="https://icemc69.craftingstore.net/" class="cta-button" target="_blank">Go to Shop</a>
+                <h2>Последни новини</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <img src="images/news-season5.png" alt="Новини Сезон 5">
+                        <h3>Сезон 5 започна!</h3>
+                        <p>Присъединете се към новия сезон и изживейте невероятни приключения.</p>
+                    </div>
+                    <div class="news-item">
+                        <img src="images/news-crates.png" alt="Обновени Crate-ове">
+                        <h3>Обновени Crate-ове</h3>
+                        <p>С нови награди и бонуси, създадени специално за вас!</p>
+                    </div>
+                    <div class="news-item">
+                        <img src="images/news-leaderboard.png" alt="Класации">
+                        <h3>Сезонни класации</h3>
+                        <p>Следете най-добрите играчи в нашия сървър.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
     <footer>
         <div class="container">
-            <p>&copy; 2025 IceMC. All rights reserved.</p>
+            <p>&copy; 2025 IceMC. Всички права запазени.</p>
         </div>
     </footer>
-    <script src="mainpage.js"></script>
 </body>
 </html>

@@ -7,75 +7,9 @@
     <title>IceMC Сървър</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mainpage.css">
-    <style>
-        body {
-            background: linear-gradient(to right, #1e3c72, #2a5298); /* Gradient background */
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-        }
-        .stars, .snow {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: url('stars.png') repeat; /* Replace with your stars image */
-            z-index: -1;
-        }
-        .snow {
-            background: url('snow.png') repeat; /* Replace with your snow image */
-            animation: snow 10s linear infinite;
-        }
-        @keyframes snow {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
-        }
-        .container {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .btn {
-            background: #ff9900;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: #cc7a00;
-        }
-        .menu a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .menu a:hover {
-            text-decoration: underline;
-        }
-        .discord-btn {
-            background: #7289DA;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        .discord-btn:hover {
-            background: #5b6eae;
-        }
-        .logo {
-            width: 120px;
-            height: auto;
-            margin: 10px auto;
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <div class="stars" id="stars"></div>
-    <div class="snow" id="snow"></div>
-    
     <nav class="menu">
         <a href="index.html">Начало</a>
         <a href="https://icemc69.craftingstore.net/">Магазин</a>
@@ -84,10 +18,9 @@
     </nav>
 
     <div class="container">
-        <!-- Add logo inside the welcome box -->
         <img src="logoo.png" alt="IceMC Logo" class="logo">
         <div class="server-info">
-            <h1>Добре дошли в IceMC</h1>
+            <h1 id="greeting">Добре дошли в IceMC</h1>
             <p>Присъединете се към най-якото Minecraft сървър изживяване!</p>
             <div class="server-details">
                 <h2>Сървър IP: icemc.site</h2>
@@ -98,84 +31,48 @@
     </div>
 
     <div class="container">
-        <div class="content">
-            <div class="news">
-                <h2>Последни новини</h2>
-                <div class="news-section">
-                    <h3>Актуализация на сървъра</h3>
-                    <p>Вече поддържаме Minecraft 1.21.4!</p>
-                </div>
-                <div class="news-section">
-                    <h3>Уикенд събитие</h3>
-                    <p>Двоен XP този уикенд!</p>
-                </div>
+        <div class="news">
+            <h2>Последни новини</h2>
+            <div class="news-section">
+                <h3>Актуализация на сървъра</h3>
+                <p>Вече поддържаме Minecraft 1.21.5!</p>
             </div>
+            <div class="news-section">
+                <h3>Уикенд събитие</h3>
+                <p>Сезон 4</p>
+            </div>
+        </div>
+    </div>
 
-            <div class="sidebar">
-                <h2>Онлайн играчи</h2>
-                <div id="player-count">
-                    <!-- Add logo inside the online players box -->
-                    <img src="logoo.png" alt="IceMC Logo" class="logo">
-                    <p>Текущо онлайн: <span id="online-players">0</span></p>
-                </div>
+    <!-- Staff Section -->
+    <div class="container staff-section">
+        <h2>Екип</h2>
+        <div class="staff-list">
+            <div class="staff-member">
+                <img src="staff1.jpg" alt="Staff Member 1">
+                <h3>Player1</h3>
+                <p>Администратор</p>
+            </div>
+            <div class="staff-member">
+                <img src="staff2.jpg" alt="Staff Member 2">
+                <h3>Player2</h3>
+                <p>Модератор</p>
+            </div>
+            <div class="staff-member">
+                <img src="staff3.jpg" alt="Staff Member 3">
+                <h3>Player3</h3>
+                <p>Поддръжка</p>
             </div>
         </div>
     </div>
 
     <div class="discord-section">
         <h2>Присъединете се към нашата Discord общност!</h2>
-        <p>Бъдете в течение и чатете с други играчи</p>
         <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
     </div>
 
-    <script>
-        // Create animated stars background
-        function createStars() {
-            const stars = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 2}s`;
-                stars.appendChild(star);
-            }
-        }
+    <button id="toggle-theme" class="btn">Смени темата</button>
 
-        // Copy IP function
-        function copyIP() {
-            navigator.clipboard.writeText('nl33.icehost.pl:25803');
-            alert('Сървър IP е копиран в клипборда!');
-        }
-
-        // Fetch player count from MCSrvStat.us API and update the DOM
-        async function fetchPlayers() {
-            const serverAddress = 'nl33.icehost.pl'; // Your server's IP
-            const serverPort = '25803'; // Your server's port
-            const apiUrl = `https://api.mcsrvstat.us/2/${serverAddress}:${serverPort}`;
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                // Check if the server is online
-                if (data.online) {
-                    const playerCount = data.players ? data.players.online : 0;
-                    document.getElementById('online-players').textContent = playerCount;
-                } else {
-                    document.getElementById('online-players').textContent = 'Offline';
-                }
-            } catch (error) {
-                console.error('Error fetching player count:', error);
-                document.getElementById('online-players').textContent = 'N/A';
-            }
-        }
-
-        // Initialize stars and player count on load
-        window.onload = () => {
-            createStars();
-            fetchPlayers();
-            setInterval(fetchPlayers, 30000); // Update every 30 seconds
-        };
-    </script>
+    <script src="mainpage.js"></script>
 </body>
 </html>

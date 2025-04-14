@@ -1,7 +1,7 @@
 // Fetch Minecraft server player count
 async function fetchPlayers() {
     const serverAddress = 'play.icemc.online';
-    const apiUrl = `api.mcstatus.io/v2/status/java/${serverAddress}`;
+    const apiUrl = `https://api.mcstatus.io/v2/status/java/${serverAddress}`;
 
     try {
         const response = await fetch(apiUrl, {
@@ -18,7 +18,7 @@ async function fetchPlayers() {
 
         const playersOnlineElement = document.getElementById("players-online");
         if (data.online) {
-            playersOnlineElement.innerText = `Players Online: ${data.players.online}`;
+            playersOnlineElement.innerText = `Играчите онлайн: ${data.players.online}`; // "Players Online" in Bulgarian
         } else {
             playersOnlineElement.innerText = "Сървърът е офлайн"; // "The server is offline" in Bulgarian
         }
@@ -38,7 +38,7 @@ async function fetchDiscordMembers() {
         if (!response.ok) throw new Error("Грешка при взимане на данни!"); // "Error fetching data!" in Bulgarian
 
         const data = await response.json();
-        document.getElementById("discord-online").innerText = `Discord Members Online: ${data.presence_count}`;
+        document.getElementById("discord-online").innerText = `Discord Членове Онлайн: ${data.presence_count}`; // "Discord Members Online" in Bulgarian
     } catch (error) {
         console.error("Error fetching Discord data:", error);
         document.getElementById("discord-online").innerText = "Няма информация"; // "No information" in Bulgarian
@@ -47,13 +47,15 @@ async function fetchDiscordMembers() {
 
 // Create falling star animation
 function createStar() {
-    let star = document.createElement("div");
+    const star = document.createElement("div");
     star.classList.add("falling-star");
     star.style.left = Math.random() * 100 + "vw";
     star.style.animationDuration = Math.random() * 3 + 2 + "s";
     document.body.appendChild(star);
 
-    setTimeout(() => { star.remove(); }, 5000);
+    setTimeout(() => {
+        star.remove();
+    }, 5000);
 }
 
 // Copy server IP to clipboard
@@ -62,16 +64,22 @@ function copyIP() {
     navigator.clipboard.writeText(ip).then(() => {
         alert("IP адресът е копиран: " + ip); // "IP address copied: " in Bulgarian
     }).catch(err => {
-        console.error("Грешка при копиране: ", err); // "Error copying: " in Bulgarian
+        console.error("Грешка при копиране: ", err); // "Error copying" in Bulgarian
     });
 }
 
-// Set custom cursor
-document.body.style.cursor = "url('pickaxe.jpg'), auto";
-
 // Initialize functions when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     fetchPlayers();
     fetchDiscordMembers();
-    setInterval(createStar, 300);
+    setInterval(createStar, 300); // Create a falling star every 300ms
 });
+
+// Theme toggle
+const toggleThemeButton = document.getElementById('toggle-theme');
+toggleThemeButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+});
+
+// Set custom cursor
+document.body.style.cursor = "url('pickaxe.jpg'), auto";

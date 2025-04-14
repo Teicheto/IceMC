@@ -60,9 +60,9 @@ function createStar() {
 
 // Copy server IP to clipboard
 function copyIP() {
-    const ip = "play.icemc.online"; // Your server IP
+    const ip = "icemc.site"; // Your server IP
     navigator.clipboard.writeText(ip).then(() => {
-        alert("IP адресът е копиран: " + ip); // "IP address copied: " in Bulgarian
+        alert("Сървър IP е копиран: " + ip); // "IP address copied: " in Bulgarian
     }).catch(err => {
         console.error("Грешка при копиране: ", err); // "Error copying" in Bulgarian
     });
@@ -70,12 +70,26 @@ function copyIP() {
 
 // Initialize functions when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
+    // Fetch Minecraft players and Discord members
     fetchPlayers();
     fetchDiscordMembers();
-    setInterval(createStar, 300); // Create a falling star every 300ms
+
+    // Create a falling star every 300ms
+    setInterval(createStar, 300);
+
+    // Set greeting based on time of day
+    const greeting = document.getElementById('greeting');
+    const hours = new Date().getHours();
+    if (hours < 12) {
+        greeting.textContent = 'Добро утро и добре дошли в IceMC!';
+    } else if (hours < 18) {
+        greeting.textContent = 'Добър ден и добре дошли в IceMC!';
+    } else {
+        greeting.textContent = 'Добър вечер и добре дошли в IceMC!';
+    }
 });
 
-// Theme toggle
+// Theme Toggle Feature
 const toggleThemeButton = document.getElementById('toggle-theme');
 toggleThemeButton.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');

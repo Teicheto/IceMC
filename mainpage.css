@@ -1,79 +1,98 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff;
-    color: #333;
+    color: #fff;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Header */
 header {
-    background-color: #0047ab;
-    color: white;
+    background: linear-gradient(135deg, #0047ab, #003580);
+    padding: 1.5rem 0;
     text-align: center;
-    padding: 1rem 0;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+header h1 span {
+    font-weight: bold;
+    color: #00d4ff;
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 1rem 0 0;
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 nav a {
-    color: white;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #00d4ff;
 }
 
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 2rem;
-    background-color: #e6f7ff;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hero h2 {
-    margin: 0;
-    color: #0047ab;
+    font-size: 2rem;
 }
 
 .hero .cta-button {
     display: inline-block;
     margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #0047ab;
-    color: white;
+    padding: 0.75rem 1.5rem;
+    background: #00d4ff;
+    color: #003580;
     text-decoration: none;
     border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
 
 .hero .cta-button:hover {
-    background-color: #003580;
+    background: #007cbf;
 }
 
 /* Features Section */
 .features {
-    padding: 2rem;
     text-align: center;
-    background-color: #fff;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.features h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
 }
 
 .features ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    font-size: 1.2rem;
 }
 
 .features li {
@@ -82,22 +101,38 @@ nav a:hover {
 
 /* Shop Section */
 .shop {
-    padding: 2rem;
     text-align: center;
-    background-color: #e6f7ff;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+}
+
+.shop h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
 }
 
 .shop .cta-button {
-    margin-top: 1rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #00d4ff;
+    color: #003580;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.shop .cta-button:hover {
+    background: #007cbf;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #0047ab;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    background: #003580;
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: auto;
 }

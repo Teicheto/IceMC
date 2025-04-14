@@ -1,177 +1,103 @@
-/* General styling for the body */
+/* General Styles */
 body {
-    background: linear-gradient(to right, #1e3c72, #2a5298); /* Gradient background */
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #0047ab;
+    color: white;
     text-align: center;
-    position: relative;
+    padding: 1rem 0;
 }
 
-/* Stars background animation */
-.stars {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url('stars.png') repeat; /* Replace with your stars image */
-    z-index: -1;
+header h1 {
+    margin: 0;
 }
 
-.snow {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url('snow.png') repeat; /* Replace with your snow image */
-    animation: snow 10s linear infinite;
-    z-index: -2;
-}
-
-@keyframes snow {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 100%; }
-}
-
-/* Menu styling */
-.menu {
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    padding: 10px 0;
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    gap: 1rem;
 }
 
-.menu a {
-    color: #ffffff;
+nav a {
+    color: white;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    font-weight: bold;
 }
 
-.menu a:hover {
-    background: #7289DA; /* Discord-like hover effect */
-    color: #ffffff;
+nav a:hover {
     text-decoration: underline;
 }
 
-/* Container styling */
-.container {
-    margin: 80px auto;
-    padding: 20px;
-    max-width: 800px;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent */
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 2rem;
+    background-color: #e6f7ff;
 }
 
-.container h1, .container h2, .container h3 {
-    color: #ff9900;
-    margin-bottom: 15px;
+.hero h2 {
+    margin: 0;
+    color: #0047ab;
 }
 
-/* Button styling */
-.btn {
-    background: linear-gradient(135deg, #ff9900, #cc7a00);
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.btn:hover {
-    background: linear-gradient(135deg, #cc7a00, #ff9900);
-    transform: scale(1.05);
-    box-shadow: 0px 6px 16px rgba(255, 153, 0, 0.6);
-}
-
-/* Discord button styling */
-.discord-btn {
-    background: #7289DA;
-    color: #ffffff;
-    padding: 12px 25px;
-    border-radius: 5px;
+.hero .cta-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #0047ab;
+    color: white;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
 }
 
-.discord-btn:hover {
-    background: #5b6eae;
-    box-shadow: 0px 6px 16px rgba(91, 110, 174, 0.6);
-    transform: scale(1.05);
-    text-decoration: none;
+.hero .cta-button:hover {
+    background-color: #003580;
 }
 
-/* Logo styling */
-.logo {
-    width: 120px;
-    height: auto;
-    margin: 20px auto;
-    display: block;
+/* Features Section */
+.features {
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff;
 }
 
-/* Sidebar and news sections */
-.content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
+.features ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-.news, .sidebar {
-    flex: 1 1 calc(50% - 10px);
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+.features li {
+    margin: 0.5rem 0;
 }
 
-.sidebar h2 {
-    color: #ff9900;
+/* Shop Section */
+.shop {
+    padding: 2rem;
+    text-align: center;
+    background-color: #e6f7ff;
 }
 
-.sidebar #player-count {
-    margin-top: 10px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+.shop .cta-button {
+    margin-top: 1rem;
 }
 
-/* Animation for glowing effect */
-@keyframes glow {
-    0% {
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-    }
-    100% {
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    }
-}
-
-.btn:hover {
-    animation: glow 1.5s infinite;
-}
-
-.discord-btn:hover {
-    animation: glow 1.5s infinite;
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #0047ab;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }

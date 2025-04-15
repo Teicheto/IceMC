@@ -1,82 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMC - Season 5</title>
+    <title>IceMC Сървър</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" href="wheel.css">
 </head>
 <body>
-    <div class="cursor"></div>
-    <header>
-        <nav class="glass-nav">
-            <div class="logo">
-                <span class="ice">Ice</span><span class="mc">MC</span>
-            </div>
-            <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Rules</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="https://icemc69.craftingstore.net/" class="shop-btn">Shop</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="stars" id="stars"></div>
+    
+    <nav class="menu">
+        <a href="index.html">Начало</a>
+        <a href="https://icemc69.craftingstore.net/">Магазин</a>
+        <a href="rules.html">Правила</a>
+        <a href="https://discord.gg/ABNscSS5wW">Discord</a>
+    </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="glow-text">Season 5 is LIVE!</h1>
-                <p class="server-ip">play.icemc.online</p>
-                <div class="buttons">
-                    <a href="https://discord.gg/UEQytBkrCA" class="neon-button">Join Discord</a>
-                    <button class="copy-ip" onclick="copyIP()">Copy IP</button>
-                </div>
+    <div class="container">
+        <div class="server-info">
+            <h1>Добре дошли в IceMC</h1>
+            <p>Присъединете се към най-якото Minecraft сървър изживяване!</p>
+            <div class="server-details">
+                <h2>Сървър IP: play.icemc.com</h2>
+                <button class="btn" onclick="copyIP()">Копирай IP</button>
+                <p>Поддържани версии: 1.19 - 1.21.5</p>
             </div>
-            <div class="player-count">
-                <span id="online-players">124</span> Players Online
-            </div>
-        </section>
+        </div>
 
-        <section class="features">
-            <h2>What's New in Season 5</h2>
-            <div class="feature-cards">
-                <div class="card">
-                    <div class="card-icon">🏰</div>
-                    <h3>New World</h3>
-                    <p>Fresh map with custom terrain</p>
+        <div class="content">
+            <div class="news">
+                <h2>Последни новини</h2>
+                <div class="news-section">
+                    <h3>Актуализация на сървъра</h3>
+                    <p>Вече поддържаме Minecraft 1.21.5!</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">⚔️</div>
-                    <h3>PvP Arena</h3>
-                    <p>Battle other players for rewards</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🎁</div>
-                    <h3>Daily Rewards</h3>
-                    <p>Login daily for special items</p>
+                <div class="news-section">
+                    <h3>Уикенд събитие</h3>
+                    <p>Двоен XP този уикенд!</p>
                 </div>
             </div>
-        </section>
 
-        <section class="news">
-            <h2>Latest Updates</h2>
-            <div class="news-grid">
-                <div class="news-card">
-                    <span class="tag">New</span>
-                    <h3>Season 5 Launch</h3>
-                    <p>Join us in this new adventure!</p>
-                </div>
-                <div class="news-card">
-                    <span class="tag">Event</span>
-                    <h3>Opening Event</h3>
-                    <p>Win amazing prizes!</p>
+            <div class="sidebar">
+                <h2>Онлайн играчи</h2>
+                <div id="player-count">
+                    <p>Текущо онлайн: <span id="online-players">0</span></p>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
 
-    <footer>
-        <p>IceMC © 2025 | Made with 💙 for our community</p>
-    </footer>
+        <div class="discord-section">
+            <h2>Присъединете се към нашата Discord общност!</h2>
+            <p>Бъдете в течение и чатете с други играчи</p>
+            <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
+        </div>
+
+
+        // Copy IP function
+        function copyIP() {
+            navigator.clipboard.writeText('play.icemc.com');
+            alert('Сървър IP е копиран в клипборда!');
+        }
+
+        // Fetch player count from server API and update the DOM
+        async function fetchPlayers() {
+            const serverAddress = 'play.icemc.com';
+            const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const playerCount = data.players ? data.players.online : 0;
+                document.getElementById('online-players').textContent = playerCount;
+            } catch (error) {
+                console.error('Error fetching player count:', error);
+            }
+        }
+
+        // Initialize stars and player count on load
+        window.onload = () => {
+            createStars();
+            fetchPlayers();
+            setInterval(fetchPlayers, 30000); // Update every 60 seconds
+        };
+    </script>
 </body>
 </html>

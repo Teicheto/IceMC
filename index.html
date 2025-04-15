@@ -44,7 +44,7 @@
             <div class="sidebar">
                 <h2>Онлайн играчи</h2>
                 <div id="player-count">
-                    <p>Текущо онлайн: <span id="online-players">0</span></p>
+                    <p>Играчи онлайн: <span id="online-players">0</span></p>
                 </div>
             </div>
         </div>
@@ -54,8 +54,9 @@
             <p>Бъдете в течение и чатете с други играчи</p>
             <a href="https://discord.gg/ABNscSS5wW" class="discord-btn">Присъединете се в Discord</a>
         </div>
+    </div><!-- Closing the container div -->
 
-
+    <script>
         // Copy IP function
         function copyIP() {
             navigator.clipboard.writeText('play.icemc.com');
@@ -80,8 +81,9 @@
         window.onload = () => {
             createStars();
             fetchPlayers();
-            setInterval(fetchPlayers, 30000); // Update every 60 seconds
+            setInterval(fetchPlayers, 30000); // Update every 30 seconds
         };
     </script>
+    <script type="text/javascript" src="mainpage.js"></script>
 </body>
 </html>

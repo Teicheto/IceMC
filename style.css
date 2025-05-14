@@ -1,0 +1,450 @@
+/* Global Reset & Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #09001a, #3a0ca3, #6a00f4);
+    background-attachment: fixed;
+    color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center; /* Applied globally, can be overridden */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+    cursor: url('images/pickaxe.jpg'), auto; /* Ensure pickaxe.jpg is in images folder */
+}
+
+.stars, .snow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -10; /* Ensure it's behind all content */
+}
+
+.snow {
+    background: url('images/snow.png') repeat; /* Ensure snow.png is in images folder */
+    animation: snow 20s linear infinite; /* Slower snow */
+}
+
+@keyframes snow {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 1000px; } /* Adjust for desired speed/density */
+}
+
+.star {
+    position: absolute;
+    width: 2px; /* Slightly smaller stars */
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate ease-in-out; /* Slower twinkle */
+}
+
+/* JS will be needed to generate and position .star elements */
+/* Example:
+function createStars() {
+    const numStars = 100; // Or more
+    const starsContainer = document.body; // Or a specific .stars div
+    for (let i = 0; i < numStars; i++) {
+        let star = document.createElement('div');
+        star.className = 'star';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.animationDelay = Math.random() * 2 + 's'; // Randomize animation start
+        starsContainer.appendChild(star);
+    }
+}
+createStars(); // Call this in your scripts.js
+*/
+
+@keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 0.9; transform: scale(1.2); }
+}
+
+.menu {
+    background: rgba(10, 0, 26, 0.5); /* Darker, theme-aligned transparent background */
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px; /* Adjusted gap */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Softer shadow */
+    position: fixed; /* Changed from sticky to fixed for consistent top position */
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* Adjusted blur */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.menu a {
+    color: #e0e0e0; /* Lighter than pure white for better blend */
+    text-decoration: none;
+    font-size: 17px; /* Slightly smaller */
+    font-weight: 600; /* Poppins bold */
+    padding: 10px 18px; /* Adjusted padding */
+    border-radius: 8px; /* Softer radius */
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu a:hover, .menu a.active {
+    color: #09001a; /* Dark text on hover */
+    background: #ffcc00;
+    transform: scale(1.05) translateY(-2px); /* Subtle lift */
+    box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
+}
+
+/* General page structure */
+main {
+    padding-top: 100px; /* Account for fixed menu height + some space */
+    padding-bottom: 40px;
+}
+
+.container {
+    width: 90%; /* More responsive width */
+    max-width: 1200px; /* Max width for large screens */
+    margin: 20px auto; /* Top margin adjusted, auto for left/right */
+    padding: 30px; /* Adjusted padding */
+    background: rgba(0, 0, 0, 0.65); /* Slightly more opaque */
+    border-radius: 15px; /* Softer radius */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: left; /* Override global text-align for content */
+}
+
+.container h1, .container h2 {
+    color: #f0f0f0;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(106, 0, 244, 0.5); /* Subtle glow matching theme */
+}
+
+.container h1 { font-size: 2.8em; }
+.container h2 { font-size: 2.2em; }
+.container h3 {
+    color: #ffcc00; /* Accent color for subheadings */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+.container p, .container li {
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #d0d0d0; /* Slightly softer than pure white for paragraph text */
+    margin-bottom: 15px;
+}
+
+.container ul, .container ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.container a {
+    color: #ffcc00; /* Accent color for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.container a:hover {
+    color: #ffd633; /* Lighter accent on hover */
+    text-decoration: underline;
+}
+
+/* Server Info (Example from user CSS, can be used on index or join page) */
+.server-info {
+    background: linear-gradient(to right, #6a00f4, #3a0ca3);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(106, 0, 244, 0.6);
+    animation: glow 2.5s infinite alternate;
+    margin-bottom: 30px;
+    color: white;
+}
+.server-info p { color: white; }
+.server-info strong { color: #ffcc00; }
+
+@keyframes glow {
+    from { box-shadow: 0 0 15px rgba(106, 0, 244, 0.4); }
+    to { box-shadow: 0 0 30px rgba(106, 0, 244, 0.8); }
+}
+
+/* Content sections like news, sidebar (Example from user CSS) */
+.content-flex { /* Renamed from .content to avoid conflict if any */
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.news-section-wrapper, .sidebar-section { /* Renamed from .news, .sidebar */
+    flex: 1;
+    background: linear-gradient(135deg, rgba(106, 0, 244, 0.2), rgba(58, 12, 163, 0.2));
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.news-article { /* Renamed from .news-section */
+    background: rgba(255, 255, 255, 0.05); /* Very subtle */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Rules specific styling (Example from user CSS) */
+.rules-list ul, .faq-list ul, .vote-sites-list ul, .feature-list ul { /* Generalizing for lists */
+    list-style: none;
+    padding: 0;
+}
+
+.rules-list li, .faq-list li, .vote-sites-list li, .feature-list .feature-item {
+    margin: 12px 0;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    border-left: 4px solid #6a00f4; /* Theme accent border */
+}
+
+.rules-list li:hover, .faq-list li:hover, .vote-sites-list li:hover, .feature-list .feature-item:hover {
+    transform: translateX(8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.12);
+    border-left-color: #ffcc00;
+}
+
+.rules-list li span, .faq-list li span { /* For highlighted text within list items */
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn, .cta-button, .copy-ip-button, .discord-button { /* Consolidating button styles */
+    display: inline-block;
+    background: linear-gradient(135deg, #ffcc00, #ffa500); /* Gold/Orange gradient */
+    color: #09001a; /* Dark text for contrast */
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    font-size: 1.1em; /* Adjusted */
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px; /* Add some margin */
+}
+
+.btn:hover, .cta-button:hover, .copy-ip-button:hover, .discord-button:hover {
+    background: linear-gradient(135deg, #ffa500, #ffcc00); /* Reverse gradient */
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.6);
+}
+
+.btn:active, .cta-button:active, .copy-ip-button:active, .discord-button:active {
+    transform: scale(0.98);
+}
+
+/* Discord Specific (from user CSS, can be used on community/discord page) */
+.discord-section { /* For a section promoting Discord */
+    background: linear-gradient(to bottom, #5865F2, #7289DA); /* Discord colors */
+    color: white;
+    text-align: center;
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0px 0px 20px rgba(88, 101, 242, 0.5);
+}
+
+.discord-btn { /* Specific for a Discord join button if different from .btn */
+    display: inline-block;
+    background: #404EED; /* Discord blurple */
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.discord-btn:hover {
+    background: #303db8; /* Darker blurple */
+    transform: scale(1.05);
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 20px; /* More padding */
+    margin-top: 40px;
+    font-size: 0.95em; /* Slightly larger */
+    color: rgba(240, 240, 240, 0.7); /* Lighter, more readable */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 0, 26, 0.3); /* Subtle background for footer */
+}
+.footer p { margin-bottom: 5px; }
+
+/* Added animations for better visual effects (from user CSS) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container > section, .container > div:not(.staff-grid) { /* Apply to direct children sections/divs */
+    animation: fadeIn 0.6s ease-out forwards;
+    animation-delay: 0.2s; /* Slight delay */
+}
+
+/* Staff Page Styles - Adapted to new theme */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+    animation: fadeIn 0.6s ease-out forwards; /* Apply fadeIn to the grid itself */
+    animation-delay: 0.4s;
+}
+
+.staff-member {
+    background: rgba(20, 0, 40, 0.7); /* Darker purple, semi-transparent */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.staff-member:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 204, 0, 0.5); /* Enhanced glow */
+}
+
+.staff-member img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #ffcc00; /* Accent color from menu hover */
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+}
+
+.staff-member h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.7em; /* Slightly larger */
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.staff-member .role {
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #09001a; /* Dark text for contrast */
+    padding: 7px 20px;
+    border-radius: 25px; /* More rounded */
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px; /* More spacing */
+}
+
+.staff-member p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #c0c0c0; /* Softer text for description */
+    flex-grow: 1;
+}
+
+/* Gallery Page Styles */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 3px solid rgba(255,255,255,0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.gallery-item img:hover {
+    transform: scale(1.05);
+    border-color: #ffcc00;
+}
+
+/* Discord Widget Styling */
+.discord-widget-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.discord-widget-container iframe {
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    .container h1 { font-size: 2.2em; }
+    .container h2 { font-size: 1.8em; }
+
+    .menu {
+        padding: 10px 15px; /* Reduced padding */
+        justify-content: space-around; /* Better for wrapping */
+    }
+    .menu a {
+        font-size: 15px; /* Smaller font */
+        padding: 8px 12px; /* Smaller padding */
+    }
+
+    .content-flex {
+        flex-direction: column;
+    }
+
+    .staff-member h3 { font-size: 1.5em; }
+    .staff-member .role { font-size: 0.85em; padding: 6px 15px; }
+    .staff-member p { font-size: 0.9em; }
+}
+
+@media (max-width: 480px) {
+    body {
+        cursor: auto; /* Disable custom cursor on small touch devices */
+    }
+    .container h1 { font-size: 2em; }
+    .container h2 { font-size: 1.6em; }
+    .menu a { font-size: 14px; padding: 8px 10px; margin: 3px; }
+    .staff-grid { grid-template-columns: 1fr; } /* Single column for staff */
+    .btn, .cta-button, .copy-ip-button, .discord-button { font-size: 1em; padding: 10px 20px; }
+}
+/* End of CSS */
+/* JavaScript for dynamic star generation */

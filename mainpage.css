@@ -1,0 +1,245 @@
+body {
+    background: linear-gradient(135deg, #09001a, #3a0ca3, #6a00f4);
+    background-attachment: fixed;
+    color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+    cursor: url('pickaxe.jpg'), auto;
+}
+
+.stars, .snow {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.snow {
+    background: url('snow.png') repeat;
+    animation: snow 10s linear infinite;
+}
+
+@keyframes snow {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.5); }
+}
+
+.menu {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 20px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu a:hover {
+    color: black;
+    background: #ffcc00;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.5);
+}
+
+.container {
+    width: 80%;
+    margin: 120px auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.server-info {
+    background: linear-gradient(to right, #6a00f4, #3a0ca3);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+    to { box-shadow: 0 0 25px rgba(255, 255, 255, 0.7); }
+}
+
+.news, .sidebar {
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.news, .sidebar {
+    flex: 1;
+    background: linear-gradient(to right, #6a00f4, #3a0ca3);
+    padding: 15px;
+}
+
+.news-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Rules specific styling */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+ul li:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+ul li span {
+    color: #ff9900;
+    font-weight: bold;
+}
+
+.btn {
+    background: linear-gradient(135deg, #3333ff, #6a00f4);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(51, 51, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #6a00f4, #3333ff);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(51, 51, 255, 0.7);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.discord-section {
+    background: linear-gradient(to bottom, #007BFF, #6db5fe);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    width: 80%;
+    margin: 20px auto;
+    box-shadow: 0px 0px 15px rgba(0, 123, 255, 0.5);
+}
+
+.discord-btn {
+    display: inline-block;
+    background: #0c40fa;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.discord-btn:hover {
+    background: #5865F2;
+    transform: scale(1.1);
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Added animations for better visual effects */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container > * {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+    
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .menu {
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .menu a {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+}

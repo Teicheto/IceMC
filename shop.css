@@ -1,0 +1,39 @@
+
+body {
+    background: linear-gradient(to bottom, red, purple);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.menu {
+    background: linear-gradient(to right, red, purple);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+.menu a:hover {
+    background: #ffcc00;
+    color: black;
+}
+.soon-text {
+    font-size: 100px;
+    font-weight: bold;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}

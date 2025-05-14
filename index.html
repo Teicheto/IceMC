@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="bg"> <!-- Промяна на езика на български -->
 <head>
@@ -110,3 +111,90 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IceMC Сървър</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mainpage.css">
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <nav class="menu">
+        <a href="index.html">Начало</a>
+        <a href="https://icemc69.craftingstore.net/">Магазин</a>
+        <a href="rules.html">Правила</a>
+        <a href="https://discord.gg/ABNscSS5wW">Discord</a>
+    </nav>
+
+    <div class="container">
+        <div class="server-info">
+            <h1>Добре дошли в IceMC</h1>
+            <p>Присъединете се към най-якото Minecraft сървър изживяване!</p>
+            <div class="server-details">
+                <h2>Сървър IP: play.icemc.online</h2>
+                <button class="btn" onclick="copyIP()">Копирай IP</button>
+                <p>Поддържани версии: 1.19 - 1.21.5</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="news">
+                <h2>Последни новини</h2>
+                <div class="news-section">
+                    <h3>Актуализация на сървъра</h3>
+                    <p>Вече поддържаме Minecraft 1.21.5!</p>
+                </div>
+                <div class="news-section">
+                    <h3>Уикенд събитие</h3>
+                    <p>Сезон 5!</p>
+                </div>
+            </div>
+
+            <div class="sidebar">
+<a href="https://minecraft-mp.com/server-s340714" target="_blank"><img src="https://minecraft-mp.com/banner-340714-3.png" border="0"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="discord-section">
+<iframe src="https://discord.com/widget?id=1371471345413787739&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div><!-- Closing the container div -->
+
+    <script>
+        // Copy IP function
+        function copyIP() {
+            navigator.clipboard.writeText('play.icemc.online');
+            alert('Сървър IP е копиран в клипборда!');
+        }
+
+        // Fetch player count from server API and update the DOM
+        async function fetchPlayers() {
+            const serverAddress = 'play.icemc.com';
+            const apiUrl = `https://api.mcsrvstat.us/3/${serverAddress}`;
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const playerCount = data.players ? data.players.online : 0;
+                document.getElementById('online-players').textContent = playerCount;
+            } catch (error) {
+                console.error('Error fetching player count:', error);
+            }
+        }
+
+        // Initialize stars and player count on load
+        window.onload = () => {
+            createStars();
+            fetchPlayers();
+            setInterval(fetchPlayers, 30000); // Update every 30 seconds
+        };
+    </script>
+    <script type="text/javascript" src="mainpage.js"></script>
+</body>
+</html>
+>>>>>>> cb86f31e40b2aa3912e97e118e9c8e7055099dfa

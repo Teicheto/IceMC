@@ -1,0 +1,111 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, red, purple); /* Gradient background */
+}
+
+/* Full Image or Map Container */
+.full-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 70px); /* Subtract the menu height */
+    position: absolute;
+    top: 70px; /* Start below the menu */
+    left: 0;
+}
+
+/* Iframe Style for BlueMap */
+.full-image iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Remove iframe border */
+}
+
+/* Details at the Bottom of the Screen */
+.details {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Body and Background Gradient */
+body {
+    background: linear-gradient(135deg, #1e0f35, #3a0ca3, #6a00f4);
+    background-attachment: fixed;
+    color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Navigation Menu Styling */
+.menu {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    border-radius: 0 0 20px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Styling for Menu Links */
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect for Menu Links */
+.menu a::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 204, 0, 0.8);
+    transition: 0.4s ease-out;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: -1;
+}
+
+.menu a:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Menu Link Hover Effects */
+.menu a:hover {
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.5);
+}
+
+body {
+    cursor: url('pickaxe.jpg'), auto;
+}

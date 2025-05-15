@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8"> <!-- Moved from previous diff -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Moved from previous diff -->
+    <title>Включи се в IceMC - Започни сега!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Snow/Star effects are handled by body/CSS now -->
+    <div class="menu">
+        <a href="index.html">Начало</a>
+        <a href="about.html">За нас</a>
+        <a href="join.html" class="active">Включи се</a>
+        <a href="rules.html">Правила</a>
+        <a href="features.html">Функции</a>
+        <a href="community.html">Общност</a>
+        <a href="vote.html">Гласувай</a>
+        <a href="gallery.html">Галерия</a>
+        <a href="staff.html">Екип</a>
+        <a href="discord.html">Discord</a>
+    </div>
+
+    <main>
+        <div class="container">
+            <section id="how-to-join">
+                <h2>Как да се включите в IceMC</h2>
+                <p>Готови ли сте да се потопите в леденото забавление? Лесно е! Добавете нашия сървър към вашия Minecraft клиент:</p>
+                <div class="join-info" style="text-align: center; margin: 20px 0;"> <!-- server-info class from new CSS could also be used here -->
+                    <p><strong>IP адрес на сървъра:</strong> <span class="server-ip animated-ip" style="color: #ffcc00; font-weight: bold;">play.icemc.online</span></p>
+                    <button onclick="copyToClipboard('play.icemc.online')" class="copy-ip-button btn">Копирай IP</button> <!-- Added .btn for new styling -->
+                </div>
+                <p>Препоръчваме да използвате Minecraft Java Edition версия <strong>1.19 - 1.21.5</strong>.</p>
+                <p><em>(Ако имате Bedrock версия и я поддържате, споменете как да се свържете и тук! Напр., "Bedrock играчи могат да се свържат чрез IP: bedrock.icemc.online Порт: 19132")</em></p>
+                <h3>Стъпки за свързване:</h3>
+                <ol>
+                    <li>Стартирайте Minecraft: Java Edition.</li>
+                    <li>Кликнете върху "Multiplayer".</li>
+                    <li>Кликнете върху "Add Server".</li>
+                    <li>Въведете "IceMC" като име на сървъра (или каквото желаете!).</li>
+                    <li>Въведете <strong class="server-ip-inline" style="color: #ffcc00;">play.icemc.online</strong> като адрес на сървъра.</li>
+                    <li>Уверете се, че "Server Resource Packs" е настроено на "Enabled" или "Prompt".</li>
+                    <li>Кликнете "Done", след това изберете IceMC от списъка със сървъри и кликнете "Join Server".</li>
+                </ol>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 IceMC. Всички права запазени.</p>
+        <p>Minecraft is &copy; Mojang Synergies AB.</p>
+    </footer>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('IP адресът на сървъра е копиран!');
+            }, function(err) {
+                alert('Неуспешно копиране на IP. Моля, копирайте го ръчно.');
+            });
+        }
+    </script>
+    <script src="scripts.js"></script> <!-- Общ JavaScript файл за снежинки, звук при навигация и галерия -->
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<<<<<<< HEAD
+    <meta charset="UTF-8"> <!-- Moved from previous diff -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Moved from previous diff -->
+    <title>Правила на сървъра - IceMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Snow/Star effects are handled by body/CSS now -->
+    <div class="menu">
+        <a href="index.html">Начало</a>
+        <a href="about.html">За нас</a>
+        <a href="join.html">Включи се</a>
+        <a href="rules.html" class="active">Правила</a>
+        <a href="features.html">Функции</a>
+        <a href="community.html">Общност</a>
+        <a href="vote.html">Гласувай</a>
+        <a href="gallery.html">Галерия</a>
+        <a href="staff.html">Екип</a>
+        <a href="discord.html">Discord</a>
+    </div>
+
+    <main>
+        <div class="container">
+            <section id="server-rules">
+                <h2>Правила на сървъра IceMC</h2>
+                <p>За да осигурим на всички приятно прекарване и честно игрово изживяване, моля, прочетете и спазвайте тези правила. Незнанието на правилата не е извинение за нарушаването им.</p>
+                
+                <h3>Общо поведение:</h3>
+                <ul class="rules-list"> <!-- Add class for styling if needed, or rely on general ul styling -->
+                    <li>Бъдете уважителни към всички играчи и членове на екипа. Без тормоз, дискриминация или прекомерна токсичност.</li>
+                    <li>Поддържайте чата подходящ. Избягвайте спам, прекомерно използване на главни букви и противоречиви теми.</li>
+                    <li>Представянето за член на екипа или друг играч не е позволено.</li>
+                </ul>
+
+                <h3>Правила на игра:</h3>
+                <ul class="rules-list">
+                    <li>Без грийфинг, рейдване (освен ако не е определена PvP/Factions зона) или кражба от маркирана земя или защитени сандъци на други играчи.</li>
+                    <li>Без чийтване, хакване, използване на бъгове или неодобрени клиентски модификации (напр. X-Ray, fly hacks, combat hacks). Optifine и минимапи (без радар за играчи/същества) обикновено са позволени. Попитайте екипа, ако не сте сигурни.</li>
+                    <li>Не изграждайте лаг машини или структури, предназначени да причинят проблеми с производителността на сървъра.</li>
+                    <li>[Добавете още специфични правила за вашия сървър, напр. PvP правила, правила за търговия, правила за AFK фармене и т.н.]</li>
+                </ul>
+
+                <h3>Последици:</h3>
+                <p>Нарушаването на правилата може да доведе до предупреждения, временни заглушавания/банове или постоянни банове, в зависимост от тежестта и честотата на нарушението. Решенията на екипа са окончателни.</p>
+                <p><strong>Най-важното: Забавлявайте се и помогнете за създаването на позитивна общност!</strong></p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 IceMC. Всички права запазени.</p>
+        <p>Minecraft is &copy; Mojang Synergies AB.</p>
+    </footer> <!-- Moved from previous diff -->
+    <script src="scripts.js"></script> <!-- Общ JavaScript файл за снежинки, звук при навигация и галерия -->
+</body>
+</html>
+=======
+    <link rel="icon" href="logoo.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IceMC Правила</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mainpage.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #1e3c72, #2a5298); /* Gradient background */
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .stars, .snow {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('stars.png') repeat; /* Replace with your stars image */
+            z-index: -1;
+        }
+        .snow {
+            background: url('snow.png') repeat; /* Replace with your snow image */
+            animation: snow 10s linear infinite;
+        }
+        @keyframes snow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        .container {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            border-radius: 10px;
+            margin: 50px auto;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        ul li span {
+            color: #ff9900;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="snow" id="snow"></div>
+
+    <nav class="menu">
+        <a href="index.html">Начало</a>
+        <a href="https://icemc69.craftingstore.net/">Магазин</a>
+        <a href="rules.html">Правила</a>
+        <a href="https://discord.gg/ABNscSS5wW">Discord</a>
+    </nav>
+
+    <div class="container">
+        <h1>📜 Правила на IceMC 📜</h1>
+        <ul>
+            <li><span>1.</span> Грийфинг – +15 дни бан (ако е малко – +1 ден бан)</li>
+            <li><span>2.</span> Кражба на предмети – +1 ден бан</li>
+            <li><span>3.</span> Използване на X-ray – +1 ден бан</li>
+            <li><span>4.</span> Обиждане на staff – +1 ден бан</li>
+            <li><span>5.</span> Бой с други играчи без взаимно съгласие – +1 час бан</li>
+            <li><span>6.</span> Използване на хак клиент – +7 дни бан</li>
+            <li><span>7.</span> Тагване на стафф – +1 час Mute</li>
+            <li><span>8.</span> Обиждане между играчи – +2 часа Mute</li>
+            <li><span>9.</span> Спам – +1 ден бан</li>
+            <li><span>10.</span> Промотиране – +69 дена бан</li>
+            <li><span>11.</span> Ходенето в end-а – +2 дни бан</li>
+            <li><span>12.</span> Обиждане в войс или чат – +1 час бан</li>
+        </ul>
+        <p class="footer">🎉 Забавлявайте се и играйте честно! 🎉</p>
+    </div>
+
+    <script>
+        // Create animated stars background
+        function createStars() {
+            const stars = document.getElementById('stars');
+            for(let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                stars.appendChild(star);
+            }
+        }
+
+        // Initialize stars on load
+        window.onload = () => {
+            createStars();
+        };
+    </script>
+</body>
+</html>
+>>>>>>> cb86f31e40b2aa3912e97e118e9c8e7055099dfa

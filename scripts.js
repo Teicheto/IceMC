@@ -44,10 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
- // This keeps your sensitive webhook URL off the client-side.
+    // --- Webhook Configuration ---
+    // Your Base64 encoded webhook URL.
+    const obfuscatedWebhookUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM3MjYzNjQxODg5OTQ0NzgwOC9RUGRvUEJFX1ppaFBzSXN3enZNdUNDUWRGMmcySjMzNXFlbmpIWWVhdlZibXRpTlhXUjE4bEtrVk05MjREUVZzTEc1Zg==";
+    const siteName = "icemc.site"; // Define your site name here for consistent use
+    const siteLogoUrl = `${window.location.origin}/logoo.png`; // Assumes logoo.png is at the root
 
+    // --- IP Logging Function ---
     async function sendIpToWebhook() {
-        // Check if we've already sent the IP in this session to avoid spamming your webhook
         if (sessionStorage.getItem('ipWebhookSent_icemc')) {
             // console.log('IP webhook already sent this session.');
             return;
@@ -63,14 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const ipData = await ipResponse.json();
             const publicIp = ipData.ip;
 
-    
-            const obfuscatedWebhookUrl = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM3MjYzNjQxODg5OTQ0NzgwOC9RUGRvUEJFX1ppaFBzSXN3enZNdUNDUWRGMmcySjMzNXFlbmpIWWVhdlZibXRpTlhXUjE4bEtrVk05MjREUVZzTEc1Zg=="; 
-            
-            if (obfuscatedWebhookUrl === "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM3MjYzNjQxODg5OTQ0NzgwOC9RUGRvUEJFX1ppaFBzSXN3enZNdUNDUWRGMmcySjMzNXFlbmpIWWVhdlZibXRpTlhXUjE4bEtrVk05MjREUVZzTEc1Zg==" || obfuscatedWebhookUrl.trim() === "") {
-                console.error("IP Logger: Webhook URL is not configured. Please replace the placeholder in scripts.js.");
+            // This is a generic placeholder string for the check, not your actual webhook.
+            const placeholderForCheck = "YOUR_BASE64_ENCODED_WEBHOOK_URL_PLACEHOLDER"; // A generic placeholder string for the check
+
+            // Check if the webhook URL is empty or still a placeholder
+            if (obfuscatedWebhookUrl.trim() === "" || obfuscatedWebhookUrl === placeholderForCheck) {
+                console.error("IP Logger: Webhook URL is not configured or is still a placeholder. Please set the correct Base64 encoded webhook URL in scripts.js.");
                 return;
             }
-
             let webhookUrl;
             try {
                 webhookUrl = atob(obfuscatedWebhookUrl); // atob() decodes Base64
@@ -79,12 +83,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; 
             }
 
-            // 3. Prepare the data to send (example for a Discord webhook)
+            // 3. Prepare the data to send with an embed
             const payload = {
-                username: "IceMC Site Monitor", // Optional: Custom webhook username
-                avatar_url: `${window.location.origin}/logoo.png`, // Assumes logoo.png is at the root of your site
-                content: `❄️ New visitor to icemc.site!\n**IP Address:** \`${publicIp}\`\n**Timestamp:** ${new Date().toLocaleString()}`
-                // For Discord, you can use embeds for richer formatting if you prefer.
+                username: `${siteName} Visitor Monitor`,
+                avatar_url: siteLogoUrl,
+                embeds: [{
+                    title: `❄️ New Visitor to ${siteName}!`,
+                    description: `A new user has landed on the site.`,
+                    color: 0x75CAEB, // A light icy blue color (hex 75CAEB)
+                    fields: [
+                        { name: "👤 IP Address", value: `\`${publicIp}\``, inline: true },
+                        { name: "🕒 Client Timestamp", value: new Date().toLocaleString(), inline: true },
+                        { name: "🌐 Current Page", value: `\`${window.location.href}\``, inline: false },
+                        { name: " GOTO Referrer", value: `\`${document.referrer || 'Direct visit or N/A'}\``, inline: false },
+                        { name: "💻 User-Agent", value: `\`\`\`${navigator.userAgent}\`\`\``, inline: false },
+                        { name: "🖥️ Screen Resolution", value: `${screen.width}x${screen.height}`, inline: true },
+                        { name: "🗣️ Browser Language", value: navigator.language, inline: true }
+                    ],
+                    footer: {
+                        text: `${siteName} Visitor Log`,
+                        icon_url: siteLogoUrl
+                    },
+                    timestamp: new Date().toISOString() // ISO 8601 timestamp for Discord's native timestamp display
+                }]
             };
 
             // 4. Send the data to the webhook
@@ -106,6 +127,77 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('IP Logger: Error in sendIpToWebhook:', error);
         }
     }
+
+    // --- Test Command Function for Developer Console ---
+    async function sendTestMessageToWebhook() {
+        console.log("Attempting to send test message...");
+        const placeholderForCheck = "YOUR_BASE64_ENCODED_WEBHOOK_URL_PLACEHOLDER";
+
+        if (obfuscatedWebhookUrl.trim() === "" || obfuscatedWebhookUrl === placeholderForCheck) {
+            const errorMsg = "Test Command: Webhook URL is not configured or is still a placeholder. Please set it in scripts.js.";
+            console.error(errorMsg);
+            return errorMsg;
+        }
+
+        let webhookUrl;
+        try {
+            webhookUrl = atob(obfuscatedWebhookUrl);
+        } catch (e) {
+            const errorMsg = "Test Command: Failed to decode webhook URL. Is it correctly Base64 encoded?";
+            console.error(errorMsg, e);
+            return errorMsg;
+        }
+
+        const payload = {
+            username: `${siteName} Test System`,
+            avatar_url: siteLogoUrl,
+            embeds: [{
+                title: "🔧 Webhook Test Message",
+                description: `This is a test message triggered from the developer console for **${siteName}**. If you see this, the webhook is working!`,
+                color: 0xFFA500, // Orange color for test messages
+                fields: [
+                    { name: "✅ Status", value: "Test successful!", inline: true },
+                    { name: "🕒 Client Timestamp", value: new Date().toLocaleString(), inline: true }
+                ],
+                footer: {
+                    text: `${siteName} Test Utility`,
+                    icon_url: siteLogoUrl
+                },
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        try {
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Test Command: Failed to send test message:', response.status, response.statusText, errorText);
+                return `Test failed: HTTP ${response.status} - ${response.statusText}. Details: ${errorText}`;
+            } else {
+                console.log('Test Command: Test message sent successfully to webhook.');
+                return "Test message sent successfully!";
+            }
+        } catch (error) {
+            console.error('Test Command: Error sending test message:', error);
+            return `Test failed: ${error.message}`;
+        }
+    }
+
+    // --- Expose functions to the window object for console access ---
+    window.web = {
+        test: sendTestMessageToWebhook,
+        // You could also expose sendIpToWebhook for testing, but be mindful of session storage
+        // testIpLog: () => {
+        //     sessionStorage.removeItem('ipWebhookSent_icemc'); // Temporarily bypass session lock for testing
+        //     console.log("Attempting to send IP log via web.testIpLog()...");
+        //     return sendIpToWebhook(); // Return the promise
+        // }
+    };
 
     // Call the function when the page loads.
     // This will run on every page that includes scripts.js.

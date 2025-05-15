@@ -108,6 +108,14 @@ createStars(); // Call this in your scripts.js
     box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
 }
 
+/* Logo Styling */
+.logo {
+    width: 50px; /* Adjust this value to make the logo smaller or larger */
+    height: auto; /* Maintains the aspect ratio of the logo */
+    vertical-align: middle; /* Helps align the logo nicely if it's next to text */
+    margin-right: 10px; /* Adds a little space if text is directly next to it */
+}
+
 /* General page structure */
 main {
     padding-top: 100px; /* Account for fixed menu height + some space */

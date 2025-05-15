@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерия - IceMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Snow/Star effects are handled by body/CSS now -->
+    <div class="menu">
+        <a href="index.html">Начало</a>
+        <a href="about.html">За нас</a>
+        <a href="join.html">Включи се</a>
+        <a href="rules.html">Правила</a>
+        <a href="features.html">Функции</a>
+        <a href="community.html">Общност</a>
+        <a href="vote.html">Гласувай</a>
+        <a href="gallery.html" class="active">Галерия</a>
+        <a href="staff.html">Екип</a>
+        <a href="discord.html">Discord</a>
+    </div>
+
+    <main>
+        <div class="container">
+            <section id="server-gallery">
+                <h2>Галерия на IceMC</h2>
+                <p>Разгледайте някои от най-впечатляващите моменти и творения от нашия сървър!</p>
+                <div class="gallery-grid">
+                    <!-- Изображенията ще бъдат заредени тук от JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 IceMC. Всички права запазени.</p>
+        <p>Minecraft е &copy; Mojang Synergies AB.</p>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- СПИСЪК С ИЗОБРАЖЕНИЯ ---
+        // Добавете имената на вашите файлове с изображения тук.
+        // Уверете се, че файловете се намират в папка 'images/'.
+        // Пример: "images/picture1.png", "images/my_build.jpg"
+        const galleryImages = [
+            "images/picture1.png", // Пример - заменете или добавете още
+            "images/picture2.png", // Пример
+            // "images/screenshot_lobby.png",
+            // "images/epic_event.jpg"
+        ];
+
+        const galleryGrid = document.querySelector('.gallery-grid');
+
+        if (!galleryGrid) {
+            console.error("Грешка: Елементът '.gallery-grid' не беше намерен. Галерията няма да бъде заредена.");
+            return;
+        }
+
+        if (galleryImages.length === 0) {
+            galleryGrid.innerHTML = '<p style="text-align: center; width: 100%;">Няма налични изображения в момента.</p>';
+        } else {
+            galleryGrid.innerHTML = ''; // Изчистване на всякакви статични елементи
+            galleryImages.forEach((imageSrc, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.classList.add('gallery-item');
+
+                const link = document.createElement('a');
+                link.href = imageSrc; // Връзка към самото изображение
+                link.target = "_blank"; // Отваряне в нов раздел
+                link.rel = "noopener noreferrer";
+
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.alt = `Изображение от галерията на IceMC ${index + 1}`; // Алтернативен текст
+                img.onerror = function() {
+                    console.warn(`Неуспешно зареждане на изображение: ${imageSrc}. Файлът може да липсва или пътят е грешен.`);
+                    // Можете да премахнете елемента, ако изображението не се зареди: // galleryItem.remove();
+                };
+
+                link.appendChild(img);
+                galleryItem.appendChild(link);
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+    });
+    </script>
+    <script src="scripts.js"></script> <!-- Общ JavaScript файл -->
+</body>
+</html>

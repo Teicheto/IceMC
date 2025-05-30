@@ -58,9 +58,6 @@
             font-size: 1em;
             color: #f00; /* For error messages */
         }
-        .auth-container .success {
-            color: #0f0; /* For success messages */
-        }
         .auth-container a {
             color: #ffcc00;
             text-decoration: none;
@@ -87,7 +84,8 @@
         <a href="discord.html">Discord</a>
         <a href="login.html" id="loginLink" class="auth-link active">Вход</a>
         <a href="register.html" id="registerLink" class="auth-link">Регистрация</a>
-        <a href="#" id="profileLink" class="auth-link" style="display: none;">Профил</a>
+        <a href="profile.html" id="profileLink" class="auth-link" style="display: none;">Профил</a>
+        <a href="settings.html" id="settingsLink" class="auth-link" style="display: none;">Настройки</a>
         <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
     </div>
 
@@ -100,9 +98,8 @@
                 <button type="submit">Вход</button>
             </form>
             <p id="loginMessage" class="message"></p>
-            <a href="#" id="forgotPasswordLink">Забравена парола?</a>
-            <a href="register.html">Нямаш акаунт? Регистрирай се!</a>
-        </div>
+            <a href="register.html">Нямаш акаунт? Регистрирай се тук!</a>
+            <a href="#">Забравена парола?</a> </div>
     </main>
 
     <footer class="footer">
@@ -111,8 +108,8 @@
     </footer>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -126,14 +123,18 @@
         };
 
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Get the Auth service
+        let app;
+        if (!getApps().length) {
+            app = initializeApp(firebaseConfig);
+        } else {
+            app = getApp();
+        }
+        const auth = getAuth(app);
 
         const loginForm = document.getElementById('loginForm');
         const loginEmail = document.getElementById('loginEmail');
         const loginPassword = document.getElementById('loginPassword');
         const loginMessage = document.getElementById('loginMessage');
-        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -141,53 +142,20 @@
             const password = loginPassword.value;
 
             try {
-                // Sign in user with email and password using modular SDK
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-                console.log('User logged in:', user);
+                await signInWithEmailAndPassword(auth, email, password);
+                console.log('User logged in:', auth.currentUser);
                 loginMessage.textContent = 'Успешен вход! Пренасочваме...';
                 loginMessage.style.color = 'green';
-                // Redirect to homepage or dashboard
                 setTimeout(() => {
-                    window.location.href = 'index.html'; // Or 'dashboard.html' if you make one
+                    window.location.href = 'index.html'; // Redirect to home page
                 }, 1500);
             } catch (error) {
                 console.error('Login error:', error.message);
-                let errorMessage = 'Грешка при вход. Моля, опитайте отново.';
+                let errorMessage = 'Грешка при вход. Моля, проверете имейл и парола.';
                 if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-                    errorMessage = 'Невалиден имейл или парола.';
+                    errorMessage = 'Грешен имейл или парола.';
                 } else if (error.code === 'auth/invalid-email') {
                     errorMessage = 'Невалиден имейл адрес.';
-                } else if (error.code === 'auth/user-disabled') {
-                    errorMessage = 'Този акаунт е деактивиран.';
-                }
-                loginMessage.textContent = errorMessage;
-                loginMessage.style.color = 'red';
-            }
-        });
-
-        forgotPasswordLink.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const email = loginEmail.value; // Use the email from the login field
-
-            if (!email) {
-                loginMessage.textContent = 'Моля, въведете имейл адреса си, за да възстановите парола.';
-                loginMessage.style.color = 'orange';
-                return;
-            }
-
-            try {
-                // Send password reset email using modular SDK
-                await sendPasswordResetEmail(auth, email);
-                loginMessage.textContent = 'Инструкции за възстановяване на парола са изпратени на вашия имейл.';
-                loginMessage.style.color = 'green';
-            } catch (error) {
-                console.error('Password reset error:', error.message);
-                let errorMessage = 'Грешка при изпращане на имейл за възстановяване.';
-                if (error.code === 'auth/invalid-email') {
-                    errorMessage = 'Невалиден имейл адрес.';
-                } else if (error.code === 'auth/user-not-found') {
-                    errorMessage = 'Няма потребител с този имейл адрес.';
                 }
                 loginMessage.textContent = errorMessage;
                 loginMessage.style.color = 'red';

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="bg"> <!-- Промяна на езика на български -->
-<head>
+<html lang="bg"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добре дошли в IceMC - Вашето епично Minecraft приключение!</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Optional: Add a favicon for your server logo -->
-    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
-</head>
+    </head>
 <body>
-    <!-- Snow/Star effects are handled by body/CSS now -->
     <div class="menu">
         <a href="index.html" class="active">Начало</a>
         <a href="about.html">За нас</a>
@@ -21,11 +17,12 @@
         <a href="gallery.html">Галерия</a>
         <a href="staff.html">Екип</a>
         <a href="discord.html">Discord</a>
-    </div>
+        <a href="login.html" id="loginLink" class="auth-link">Вход</a>
+        <a href="register.html" id="registerLink" class="auth-link">Регистрация</a>
+        <a href="#" id="profileLink" class="auth-link" style="display: none;">Профил</a> <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a> </div>
 
     <main>
         <div class="container hero-container" style="text-align: center;">
-            <!-- Enhanced Hero Section -->
             <img src="logoo.png" alt="IceMC Голямо Лого" style="max-width: 250px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 0 25px rgba(255,204,0,0.5);">
             <h1>❄️ Добре дошли в Леденото Кралство на IceMC! ❄️</h1>
             <p class="tagline" style="font-size: 1.4em; margin-bottom: 25px; color: #ffcc00; text-shadow: 1px 1px 2px #000;">
@@ -81,8 +78,7 @@
                     <p><em>Публикувано: [Дата]</em> - Благодарим на всички участници в последното ни състезание! Победителите са обявени в канала <code>#събития</code> в Discord. Честито!</p>
                     <a href="gallery.html" class="btn">Разгледай творенията</a>
                 </div>
-                <!-- Тук можете да добавяте още новини или да ги зареждате динамично -->
-            </section>
+                </section>
         </div>
 
         <div class="container">
@@ -106,7 +102,7 @@
         <p>Minecraft is &copy; Mojang Synergies AB.</p>
     </footer>
 
-    <script src="scripts.js"></script> <!-- Общ JavaScript файл за снежинки, звук при навигация и галерия -->
-
-</body>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script type="module" src="scripts.js"></script> </body>
 </html>

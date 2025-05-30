@@ -87,7 +87,8 @@
         <a href="discord.html">Discord</a>
         <a href="login.html" id="loginLink" class="auth-link">Вход</a>
         <a href="register.html" id="registerLink" class="auth-link active">Регистрация</a>
-        <a href="#" id="profileLink" class="auth-link" style="display: none;">Профил</a>
+        <a href="profile.html" id="profileLink" class="auth-link" style="display: none;">Профил</a>
+        <a href="settings.html" id="settingsLink" class="auth-link" style="display: none;">Настройки</a>
         <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
     </div>
 
@@ -111,8 +112,10 @@
     </footer>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -126,8 +129,14 @@
         };
 
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Get the Auth service
+        let app;
+        if (!getApps().length) {
+            app = initializeApp(firebaseConfig);
+        } else {
+            app = getApp();
+        }
+        const auth = getAuth(app);
+        const db = getFirestore(app); // Get the Firestore service
 
         const registerForm = document.getElementById('registerForm');
         const registerEmail = document.getElementById('registerEmail');
@@ -148,10 +157,21 @@
             }
 
             try {
-                // Create user with email and password using modular SDK
+                // Create user with email and password
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-                console.log('User registered:', user);
+
+                // Create a user profile document in Firestore
+                const userDocRef = doc(db, "users", user.uid);
+                await setDoc(userDocRef, {
+                    uid: user.uid,
+                    email: user.email,
+                    webName: email.split('@')[0], // Initial web name from email prefix
+                    createdAt: new Date(),
+                    // Add other initial profile fields here, e.g., minecraftUUID: ""
+                });
+
+                console.log('User registered and profile created:', user);
                 registerMessage.textContent = 'Успешна регистрация! Пренасочваме...';
                 registerMessage.style.color = 'green';
                 

@@ -36,9 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, async (user) => { // Made async to use await for Firestore
         const loginLink = document.getElementById('loginLink');
         const registerLink = document.getElementById('registerLink');
-        const profileLink = document.getElementById('profileLink');
-        const settingsLink = document.getElementById('settingsLink'); // New
-        const logoutLink = document.getElementById('logoutLink');
+        
+        // New elements for the user menu
+        const userMenuContainer = document.getElementById('userMenuContainer');
+        const displayedUserName = document.getElementById('displayedUserName');
+        const profileLinkDropdown = document.getElementById('profileLinkDropdown');
+        const settingsLinkDropdown = document.getElementById('settingsLinkDropdown');
+        const logoutLinkDropdown = document.getElementById('logoutLinkDropdown'); // Get the logout link from the dropdown
 
         if (user) {
             // User is signed in.
@@ -65,31 +69,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).catch(error => console.error("Error creating user doc:", error));
             }
 
-            // Update navigation
+            // Update navigation elements based on login state
             if (loginLink) loginLink.style.display = 'none';
             if (registerLink) registerLink.style.display = 'none';
-            if (profileLink) {
-                profileLink.style.display = 'inline-block';
-                profileLink.textContent = `${webName} Профил`; // Display web name
-                profileLink.href = 'profile.html';
-            }
-            if (settingsLink) settingsLink.style.display = 'inline-block'; // Show settings link
-            if (logoutLink) logoutLink.style.display = 'inline-block';
+            
+            if (userMenuContainer) userMenuContainer.style.display = 'inline-block'; // Show the new user menu container
+            if (displayedUserName) displayedUserName.textContent = webName; // Set the username in the greeting
+            if (profileLinkDropdown) profileLinkDropdown.href = 'profile.html'; // Ensure correct href
+            if (settingsLinkDropdown) settingsLinkDropdown.href = 'settings.html'; // Ensure correct href for settings (assuming settings.html)
+
         } else {
             // User is signed out.
             // console.log('User logged out');
             if (loginLink) loginLink.style.display = 'inline-block';
             if (registerLink) registerLink.style.display = 'inline-block';
-            if (profileLink) profileLink.style.display = 'none';
-            if (settingsLink) settingsLink.style.display = 'none'; // Hide settings link
-            if (logoutLink) logoutLink.style.display = 'none';
+            
+            if (userMenuContainer) userMenuContainer.style.display = 'none'; // Hide the new user menu container
         }
     });
 
-    // --- Logout Functionality ---
-    const logoutLink = document.getElementById('logoutLink');
-    if (logoutLink) {
-        logoutLink.addEventListener('click', async (e) => {
+    // --- Logout Functionality (now targeting the dropdown logout link) ---
+    const logoutLinkDropdown = document.getElementById('logoutLinkDropdown');
+    if (logoutLinkDropdown) {
+        logoutLinkDropdown.addEventListener('click', async (e) => {
             e.preventDefault();
             try {
                 await signOut(auth); // Use signOut from modular SDK
@@ -104,35 +106,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Snowflake Animation ---
-    const snowflakesContainer = document.getElementById('snowflakes-container');
-    if (snowflakesContainer) {
-        const numberOfSnowflakes = 50; // Adjust for more/less snow
+    // --- Star Animation (aligned with CSS .star class) ---
+    const starsContainer = document.querySelector('.stars') || document.body; // Use .stars div or body as fallback
+    const numStars = 100; // Number of stars to generate
 
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-
-            const size = Math.random() * 5 + 2; // Snowflake size between 2px and 7px
-            snowflake.style.width = `${size}px`;
-            snowflake.style.height = `${size}px`;
-
-            snowflake.style.left = `${Math.random() * 100}vw`; // Random horizontal start
-            
-            const fallDuration = Math.random() * 8 + 5; // 5 to 13 seconds
-            const fallDelay = Math.random() * 5; // 0 to 5 seconds delay
-            snowflake.style.animationDuration = `${fallDuration}s`;
-            snowflake.style.animationDelay = `${fallDelay}s`;
-
-            snowflakesContainer.appendChild(snowflake);
+    function createStars() {
+        for (let i = 0; i < numStars; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDelay = Math.random() * 2 + 's'; // Randomize animation start
+            starsContainer.appendChild(star);
         }
-
-        for (let i = 0; i < numberOfSnowflakes; i++) {
-            createSnowflake();
-        }
-    } else {
-        // console.warn("Snowflakes container with ID 'snowflakes-container' not found. Snowflake animation might not work as expected.");
     }
+    // Only call createStars if a .stars container exists or if we're using body and it's not already filled
+    if (starsContainer) { // Ensure the container exists
+        createStars();
+    }
+
 
     // --- Navigation Hover Sound ---
     const navLinks = document.querySelectorAll('.menu a'); // Target links within your '.menu' class
@@ -184,14 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if the webhook URL is empty or still a placeholder
             if (obfuscatedWebhookUrl.trim() === "" || obfuscatedWebhookUrl === placeholderForCheck) {
                 console.error("IP Logger: Webhook URL is not configured or is still a placeholder. Please set the correct Base64 encoded webhook URL in scripts.js.");
-                return; 
+                return;
             }
             let webhookUrl;
             try {
                 webhookUrl = atob(obfuscatedWebhookUrl); // atob() decodes Base64
             } catch (e) {
                 console.error("IP Logger: Failed to decode webhook URL. Is it correctly Base64 encoded?", e);
-                return; 
+                return;
             }
 
             // Introduce another small delay before sending to the webhook

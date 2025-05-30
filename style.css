@@ -50,23 +50,6 @@ body {
     animation: twinkle 2s infinite alternate ease-in-out; /* Slower twinkle */
 }
 
-/* JS will be needed to generate and position .star elements */
-/* Example:
-function createStars() {
-    const numStars = 100; // Or more
-    const starsContainer = document.body; // Or a specific .stars div
-    for (let i = 0; i < numStars; i++) {
-        let star = document.createElement('div');
-        star.className = 'star';
-        star.style.top = Math.random() * 100 + 'vh';
-        star.style.left = Math.random() * 100 + 'vw';
-        star.style.animationDelay = Math.random() * 2 + 's'; // Randomize animation start
-        starsContainer.appendChild(star);
-    }
-}
-createStars(); // Call this in your scripts.js
-*/
-
 @keyframes twinkle {
     0% { opacity: 0.2; transform: scale(0.8); }
     100% { opacity: 0.9; transform: scale(1.2); }
@@ -107,6 +90,82 @@ createStars(); // Call this in your scripts.js
     transform: scale(1.05) translateY(-2px); /* Subtle lift */
     box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
 }
+
+/* --- New User Menu Container Styling --- */
+.user-menu-container {
+    position: relative; /* For dropdown positioning */
+    display: inline-block; /* Allows side-by-side with other menu items */
+    padding: 10px 15px; /* Matches existing padding */
+    background-color: rgba(0, 0, 0, 0.4); /* Slightly different background for distinction */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; /* Spacing from other menu items */
+    transition: background-color 0.3s ease;
+}
+
+.user-menu-container:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.user-greeting {
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block; /* Ensures it takes full width of its container */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+#displayedUserName {
+    color: #ffcc00; /* Highlight the username */
+}
+
+.user-dropdown {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position right below the user-greeting */
+    left: 0;
+    width: 100%; /* Match width of the container */
+    min-width: 160px; /* Ensure enough space for longer text */
+    background-color: rgba(0, 0, 0, 0.9); /* Darker background for dropdown */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+    z-index: 1000; /* Ensure it's on top of other content */
+    border-radius: 0 0 5px 5px; /* Rounded corners only at bottom */
+    overflow: hidden; /* For rounded corners */
+}
+
+.user-dropdown a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 1em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.user-dropdown a:hover {
+    background-color: rgba(255, 204, 0, 0.2); /* Light highlight on hover */
+    color: #ffcc00;
+}
+
+/* Show the dropdown menu on hover */
+.user-menu-container:hover .user-dropdown {
+    display: block;
+}
+
+/* Specific styling for the logout link in the dropdown */
+#logoutLinkDropdown {
+    color: #ff6347; /* Tomato color for logout */
+    font-weight: bold;
+}
+
+#logoutLinkDropdown:hover {
+    background-color: rgba(255, 99, 71, 0.2); /* Lighter tomato highlight */
+    color: #ff8c00;
+}
+/* --- End of New User Menu Container Styling --- */
+
 
 /* Logo Styling */
 .logo {
@@ -442,6 +501,21 @@ main {
     .staff-member h3 { font-size: 1.5em; }
     .staff-member .role { font-size: 0.85em; padding: 6px 15px; }
     .staff-member p { font-size: 0.9em; }
+
+    /* Adjust user menu on smaller screens */
+    .user-menu-container {
+        padding: 8px 12px; /* Smaller padding */
+        margin-left: 5px; /* Less margin */
+    }
+    .user-greeting {
+        font-size: 1em; /* Smaller font */
+    }
+    .user-dropdown {
+        min-width: unset; /* Remove min-width constraint */
+        width: 150px; /* Fixed width, or adjust as needed */
+        right: 0; /* Align to the right of the container */
+        left: unset;
+    }
 }
 
 @media (max-width: 480px) {
@@ -453,6 +527,8 @@ main {
     .menu a { font-size: 14px; padding: 8px 10px; margin: 3px; }
     .staff-grid { grid-template-columns: 1fr; } /* Single column for staff */
     .btn, .cta-button, .copy-ip-button, .discord-button { font-size: 1em; padding: 10px 20px; }
+    .user-dropdown {
+        width: 140px; /* Even smaller for very small screens */
+    }
 }
 /* End of CSS */
-/* JavaScript for dynamic star generation */

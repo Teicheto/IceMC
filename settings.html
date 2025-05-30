@@ -90,9 +90,15 @@
         <a href="discord.html">Discord</a>
         <a href="login.html" id="loginLink" class="auth-link" style="display: none;">Вход</a>
         <a href="register.html" id="registerLink" class="auth-link" style="display: none;">Регистрация</a>
-        <a href="profile.html" id="profileLink" class="auth-link" style="display: none;">Профил</a>
-        <a href="settings.html" id="settingsLink" class="auth-link active">Настройки</a>
-        <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
+
+        <div class="user-menu-container" id="userMenuContainer" style="display: none;">
+            <span class="user-greeting" id="userGreeting">Здравейте, <span id="displayedUserName">Потребител</span></span>
+            <div class="user-dropdown">
+                <a href="profile.html">Моят Профил</a>
+                <a href="settings.html" class="active">Настройки</a>
+                <a href="#" id="logoutLinkDropdown">Изход</a>
+            </div>
+        </div>
     </div>
 
     <main>
@@ -167,7 +173,7 @@
                 } else {
                     currentWebNameInput.value = user.email.split('@')[0];
                     console.warn("User profile document not found in Firestore for UID:", user.uid, "on settings page.");
-                    // Fallback: create if missing (though register should handle this)
+                    // Fallback: create if missing (though register should do this)
                     await setDoc(userDocRef, {
                         uid: user.uid,
                         email: user.email,

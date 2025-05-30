@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моят Профил - IceMC</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 80px auto 40px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+        }
+        .profile-container h2 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .profile-info p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+        .profile-info strong {
+            color: #ffcc00;
+        }
+        .profile-actions {
+            margin-top: 30px;
+        }
+        .profile-actions .btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .profile-actions .btn:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="index.html">Начало</a>
+        <a href="about.html">За нас</a>
+        <a href="join.html">Включи се</a>
+        <a href="rules.html">Правила</a>
+        <a href="features.html">Функции</a>
+        <a href="community.html">Общност</a>
+        <a href="vote.html">Гласувай</a>
+        <a href="gallery.html">Галерия</a>
+        <a href="staff.html">Екип</a>
+        <a href="discord.html">Discord</a>
+        <a href="login.html" id="loginLink" class="auth-link" style="display: none;">Вход</a>
+        <a href="register.html" id="registerLink" class="auth-link" style="display: none;">Регистрация</a>
+        <a href="profile.html" id="profileLink" class="auth-link active">Профил</a>
+        <a href="settings.html" id="settingsLink" class="auth-link" style="display: none;">Настройки</a>
+        <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
+    </div>
+
+    <main>
+        <div class="container profile-container">
+            <h2>Моят Minecraft Профил</h2>
+            <div class="profile-info">
+                <p>Здравейте, <strong id="profileWebName">Гост</strong>!</p>
+                <p>Вашият имейл: <strong id="profileEmail">Зареждане...</strong></p>
+                <p>Вашето потребителско ID: <strong id="profileUID">Зареждане...</strong></p>
+                <h3>Моите статистики (предстои)</h3>
+                <p>Тук ще се показват вашите Minecraft статистики, постижения и друга информация за играта.</p>
+            </div>
+            <div class="profile-actions">
+                <a href="settings.html" class="btn">Настройки на профила</a>
+                </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 IceMC. Всички права запазени.</p>
+        <p>Minecraft is &copy; Mojang Synergies AB.</p>
+    </footer>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script type="module" src="scripts.js"></script> <script type="module">
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        // Firebase configuration (re-define if not using a global script/module, or use window.firebaseConfig)
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7DEECNxcGlYdNkPLEz4K9Q_wrM9-HVMc",
+            authDomain: "icemc-site.firebaseapp.com",
+            projectId: "icemc-site",
+            storageBucket: "icemc-site.firebasestorage.app",
+            messagingSenderId: "748723124144",
+            appId: "1:748723124144:web:a3d9a13a4b44f7475d0875",
+            measurementId: "G-8QNKHEMJQE"
+        };
+        let app;
+        if (!getApps().length) { app = initializeApp(firebaseConfig); } else { app = getApp(); }
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Elements to update
+        const profileWebName = document.getElementById('profileWebName');
+        const profileEmail = document.getElementById('profileEmail');
+        const profileUID = document.getElementById('profileUID');
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                profileEmail.textContent = user.email;
+                profileUID.textContent = user.uid;
+
+                const userDocRef = doc(db, "users", user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    const userData = userDocSnap.data();
+                    if (userData.webName) {
+                        profileWebName.textContent = userData.webName;
+                    } else {
+                        profileWebName.textContent = user.email.split('@')[0];
+                    }
+                    // You can display other profile data here, e.g., if (userData.minecraftUUID) { ... }
+                } else {
+                    profileWebName.textContent = user.email.split('@')[0];
+                    console.warn("User profile document not found in Firestore for UID:", user.uid);
+                    // Optionally create a profile if it doesn't exist (though register should do this)
+                    await setDoc(userDocRef, {
+                        uid: user.uid,
+                        email: user.email,
+                        webName: user.email.split('@')[0],
+                        createdAt: new Date()
+                    }).catch(error => console.error("Error creating user doc on profile page:", error));
+                }
+            } else {
+                // User is not logged in, redirect to login page
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

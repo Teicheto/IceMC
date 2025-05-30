@@ -1,6 +1,87 @@
-// --- Snowflake Animation ---
+// --- Firebase Initialization and Imports ---
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+// If you use analytics, uncomment the next line
+// import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyA7DEECNxcGlYdNkPLEz4K9Q_wrM9-HVMc",
+    authDomain: "icemc-site.firebaseapp.com",
+    projectId: "icemc-site",
+    storageBucket: "icemc-site.firebasestorage.app",
+    messagingSenderId: "748723124144",
+    appId: "1:748723124144:web:a3d9a13a4b44f7475d0875",
+    measurementId: "G-8QNKHEMJQE"
+};
+
+// Initialize Firebase only if no app is already initialized
+let app;
+if (!getApps().length) { // Check if any Firebase app has been initialized
+    app = initializeApp(firebaseConfig);
+} else {
+    app = getApp(); // Get the already initialized app instance
+}
+
+const auth = getAuth(app); // Get the Auth service
+// If you use analytics, uncomment the next line
+// const analytics = getAnalytics(app);
+
+// --- DOMContentLoaded Listener for all page-specific setup ---
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Authentication State Listener ---
+    onAuthStateChanged(auth, (user) => {
+        const loginLink = document.getElementById('loginLink');
+        const registerLink = document.getElementById('registerLink');
+        const profileLink = document.getElementById('profileLink');
+        const logoutLink = document.getElementById('logoutLink');
+
+        if (user) {
+            // User is signed in.
+            // console.log('User logged in:', user.email);
+            if (loginLink) loginLink.style.display = 'none';
+            if (registerLink) registerLink.style.display = 'none';
+            if (profileLink) {
+                profileLink.style.display = 'inline-block'; // Or 'block' depending on your CSS
+                profileLink.textContent = `Профил (${user.email.split('@')[0]})`; // Show username/email prefix
+                profileLink.href = 'profile.html'; // Create a profile page later
+            }
+            if (logoutLink) logoutLink.style.display = 'inline-block';
+        } else {
+            // User is signed out.
+            // console.log('User logged out');
+            if (loginLink) loginLink.style.display = 'inline-block';
+            if (registerLink) registerLink.style.display = 'inline-block';
+            if (profileLink) profileLink.style.display = 'none';
+            if (logoutLink) logoutLink.style.display = 'none';
+        }
+    });
+
+    // --- Logout Functionality ---
+    const logoutLink = document.getElementById('logoutLink');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signOut(auth); // Use signOut from modular SDK
+                console.log('User signed out successfully.');
+                // Redirect to home page or login page after logout
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Logout error:', error.message);
+                // Instead of alert, you might want a custom message box or just console log
+                // alert('Грешка при изход: ' + error.message);
+            }
+        });
+    }
+
+    // --- Snowflake Animation ---
     const snowflakesContainer = document.getElementById('snowflakes-container');
+    // Ensure you have a div with id="snowflakes-container" in your HTML,
+    // or create the snowflakes directly in the body as per your original CSS comment.
+    // If you are relying on CSS background animation, this JS isn't needed.
+    // If you want JS-generated snowflakes, add a `<div id="snowflakes-container"></div>` to your body.
     if (snowflakesContainer) {
         const numberOfSnowflakes = 50; // Adjust for more/less snow
 
@@ -25,23 +106,28 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < numberOfSnowflakes; i++) {
             createSnowflake();
         }
+    } else {
+        console.warn("Snowflakes container with ID 'snowflakes-container' not found. Snowflake animation might not work as expected.");
+        // If you intend for snowflakes to be generated directly in body, remove this warning
+        // and adjust createSnowflake to append to document.body
     }
 
     // --- Navigation Hover Sound ---
-    const navLinks = document.querySelectorAll('nav a');
-    // Ensure hoverSound element exists if you want to use it across pages
-    // It might be better to only have the hover sound on index.html or handle its absence gracefully
+    const navLinks = document.querySelectorAll('.menu a'); // Target links within your '.menu' class
     const hoverSound = document.getElementById('hoverSound'); // This ID needs to be on an <audio> tag in your HTML
 
     if (hoverSound) { // Check if the audio element exists on the current page
         navLinks.forEach(link => {
             link.addEventListener('mouseenter', () => {
+                // Check if audio is ready enough and not currently playing
                 if (hoverSound.readyState >= 2 && hoverSound.paused) {
-                     hoverSound.currentTime = 0; 
-                     hoverSound.play().catch(error => console.log("Audio play failed:", error));
+                    hoverSound.currentTime = 0; // Reset to start
+                    hoverSound.play().catch(error => console.log("Audio play failed (user gesture required):", error));
                 }
             });
         });
+    } else {
+        // console.warn("Audio element with ID 'hoverSound' not found. Navigation hover sound will not play.");
     }
 
     // --- Webhook Configuration ---
@@ -76,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Check if the webhook URL is empty or still a placeholder
             if (obfuscatedWebhookUrl.trim() === "" || obfuscatedWebhookUrl === placeholderForCheck) {
                 console.error("IP Logger: Webhook URL is not configured or is still a placeholder. Please set the correct Base64 encoded webhook URL in scripts.js.");
-                return;
+                return; 
             }
             let webhookUrl;
             try {
@@ -205,8 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // }
     };
 
-    // Call the function when the page loads.
-    // This will run on every page that includes scripts.js.
-    // We removed the overall setTimeout and added smaller delays inside the function
-    sendIpToWebhook(); 
+    // Call the IP logging function when the page loads.
+    sendIpToWebhook();
 });

@@ -18,21 +18,22 @@
         <a href="gallery.html">Галерия</a>
         <a href="staff.html">Екип</a>
         <a href="discord.html">Discord</a>
+        
         <a href="login.html" id="loginLink" class="auth-link">Вход</a>
         <a href="register.html" id="registerLink" class="auth-link">Регистрация</a>
 
         <div class="user-menu-container" id="userMenuContainer" style="display: none;">
-            <span class="user-greeting" id="userGreeting">Здравейте, <span id="displayedUserName">Потребител</span></span>
+            <span class="user-greeting">Здравейте, <span id="displayedUserName">Потребител</span></span>
             <div class="user-dropdown">
-                <a href="profile.html">Моят Профил</a>
-                <a href="settings.html">Настройки</a>
+                <a href="profile.html" id="profileLinkDropdown">Моят Профил</a>
+                <a href="settings.html" id="settingsLinkDropdown">Настройки</a>
                 <a href="#" id="logoutLinkDropdown">Изход</a>
             </div>
         </div>
     </div>
 
     <div class="background-container">
-        <div id="snowflakes-container"></div>
+        <div class="stars"></div> 
         <main>
             <div class="container">
                 <h1>Добре дошли в IceMC!</h1>
@@ -61,6 +62,7 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    
     <script type="module" src="scripts.js"></script>
     
     <script>

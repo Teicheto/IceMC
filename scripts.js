@@ -1,6 +1,7 @@
 // --- Firebase Initialization and Imports ---
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 // If you use analytics, uncomment the next line
 // import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
 
@@ -24,6 +25,7 @@ if (!getApps().length) { // Check if any Firebase app has been initialized
 }
 
 const auth = getAuth(app); // Get the Auth service
+const db = getFirestore(app); // Get the Firestore service
 // If you use analytics, uncomment the next line
 // const analytics = getAnalytics(app);
 
@@ -31,22 +33,47 @@ const auth = getAuth(app); // Get the Auth service
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Authentication State Listener ---
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => { // Made async to use await for Firestore
         const loginLink = document.getElementById('loginLink');
         const registerLink = document.getElementById('registerLink');
         const profileLink = document.getElementById('profileLink');
+        const settingsLink = document.getElementById('settingsLink'); // New
         const logoutLink = document.getElementById('logoutLink');
 
         if (user) {
             // User is signed in.
             // console.log('User logged in:', user.email);
+
+            // Fetch user's custom profile data (like webName) from Firestore
+            const userDocRef = doc(db, "users", user.uid);
+            const userDocSnap = await getDoc(userDocRef);
+
+            let webName = user.email.split('@')[0]; // Default to email prefix
+            if (userDocSnap.exists()) {
+                const userData = userDocSnap.data();
+                if (userData.webName) {
+                    webName = userData.webName;
+                }
+            } else {
+                // If user profile doesn't exist in Firestore (should be created on register),
+                // create it here with a default webName. This is a fallback.
+                await setDoc(userDocRef, {
+                    uid: user.uid,
+                    email: user.email,
+                    webName: webName, // Initial web name from email prefix
+                    createdAt: new Date()
+                }).catch(error => console.error("Error creating user doc:", error));
+            }
+
+            // Update navigation
             if (loginLink) loginLink.style.display = 'none';
             if (registerLink) registerLink.style.display = 'none';
             if (profileLink) {
-                profileLink.style.display = 'inline-block'; // Or 'block' depending on your CSS
-                profileLink.textContent = `Профил (${user.email.split('@')[0]})`; // Show username/email prefix
-                profileLink.href = 'profile.html'; // Create a profile page later
+                profileLink.style.display = 'inline-block';
+                profileLink.textContent = `${webName} Профил`; // Display web name
+                profileLink.href = 'profile.html';
             }
+            if (settingsLink) settingsLink.style.display = 'inline-block'; // Show settings link
             if (logoutLink) logoutLink.style.display = 'inline-block';
         } else {
             // User is signed out.
@@ -54,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loginLink) loginLink.style.display = 'inline-block';
             if (registerLink) registerLink.style.display = 'inline-block';
             if (profileLink) profileLink.style.display = 'none';
+            if (settingsLink) settingsLink.style.display = 'none'; // Hide settings link
             if (logoutLink) logoutLink.style.display = 'none';
         }
     });
@@ -78,10 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Snowflake Animation ---
     const snowflakesContainer = document.getElementById('snowflakes-container');
-    // Ensure you have a div with id="snowflakes-container" in your HTML,
-    // or create the snowflakes directly in the body as per your original CSS comment.
-    // If you are relying on CSS background animation, this JS isn't needed.
-    // If you want JS-generated snowflakes, add a `<div id="snowflakes-container"></div>` to your body.
     if (snowflakesContainer) {
         const numberOfSnowflakes = 50; // Adjust for more/less snow
 
@@ -107,9 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createSnowflake();
         }
     } else {
-        console.warn("Snowflakes container with ID 'snowflakes-container' not found. Snowflake animation might not work as expected.");
-        // If you intend for snowflakes to be generated directly in body, remove this warning
-        // and adjust createSnowflake to append to document.body
+        // console.warn("Snowflakes container with ID 'snowflakes-container' not found. Snowflake animation might not work as expected.");
     }
 
     // --- Navigation Hover Sound ---

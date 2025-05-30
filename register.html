@@ -3,191 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMc - Стаф Регистрация</title>
-    <link rel="icon" href="logo.jpg.jpg" type="image/png">
-    <link rel="stylesheet" href="mainpage.css">
+    <title>Регистрация - IceMC</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Falling star animation */
-        .falling-star {
-            position: absolute;
-            top: 0;
-            width: 2px;
-            height: 10px;
-            background-color: white;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        /* Custom cursor */
-        body {
-            cursor: url('pickaxe.jpg'), auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .register-container {
-            background-color: rgba(0, 0, 0, 0.8);
+        /* Basic styling for forms - adjust as needed */
+        .auth-container {
+            max-width: 500px;
+            margin: 80px auto 40px auto; /* Adjust margin-top to clear header */
             padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 400px;
             text-align: center;
-            color: white;
         }
-
-        .register-container h1 {
-            margin-bottom: 30px;
+        .auth-container h2 {
             color: #fff;
+            margin-bottom: 25px;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px #000;
         }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: none;
+        .auth-container input[type="email"],
+        .auth-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
-            margin-top: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+            outline: none;
         }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        .auth-container input[type="email"]:focus,
+        .auth-container input[type="password"]:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 8px rgba(255,204,0,0.5);
         }
-
-        .register-btn {
-            background-color: #4CAF50;
+        .auth-container button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 25px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-
-        .register-btn:hover {
-            background-color: #45a049;
+        .auth-container button:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
         }
-
-        .login-link {
+        .auth-container .message {
             margin-top: 20px;
-            color: #fff;
+            font-size: 1em;
+            color: #f00; /* For error messages */
         }
-
-        .login-link a {
-            color: #4CAF50;
+        .auth-container .success {
+            color: #0f0; /* For success messages */
+        }
+        .auth-container a {
+            color: #ffcc00;
             text-decoration: none;
+            margin-top: 15px;
+            display: block;
+            font-size: 0.95em;
         }
-
-        .login-link a:hover {
+        .auth-container a:hover {
             text-decoration: underline;
-        }
-
-        /* Menu styling */
-        .menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        .menu a:hover {
-            color: #4CAF50;
         }
     </style>
 </head>
 <body>
     <div class="menu">
         <a href="index.html">Начало</a>
-        <a href="https://icemc69.craftingstore.net" target="_blank">Магазин</a>
-        <a href="wheel.html">Колело на късмета</a>
-        <a href="team.html">Екип</a>
-        <a href="staff.html">Стаф</a>
+        <a href="about.html">За нас</a>
+        <a href="join.html">Включи се</a>
+        <a href="rules.html">Правила</a>
+        <a href="features.html">Функции</a>
+        <a href="community.html">Общност</a>
+        <a href="vote.html">Гласувай</a>
+        <a href="gallery.html">Галерия</a>
+        <a href="staff.html">Екип</a>
+        <a href="discord.html">Discord</a>
+        <a href="login.html" id="loginLink" class="auth-link">Вход</a>
+        <a href="register.html" id="registerLink" class="auth-link active">Регистрация</a>
+        <a href="#" id="profileLink" class="auth-link" style="display: none;">Профил</a>
+        <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
     </div>
 
-    <div class="register-container">
-        <h1>Стаф Регистрация</h1>
-        <form id="registerForm">
-            <div class="form-group">
-                <input type="text" id="username" placeholder="Потребителско име" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="adminPassword" placeholder="Админ парола" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="newPassword" placeholder="Вашата нова парола" required>
-            </div>
-            <button type="submit" class="register-btn">Регистрация</button>
-        </form>
-        <div class="login-link">
-            <p>Вече имате акаунт? <a href="staff.html">Влезте</a></p>
+    <main>
+        <div class="container auth-container">
+            <h2>Регистрация</h2>
+            <form id="registerForm">
+                <input type="email" id="registerEmail" placeholder="Имейл" required>
+                <input type="password" id="registerPassword" placeholder="Парола" required>
+                <input type="password" id="confirmPassword" placeholder="Потвърди паролата" required>
+                <button type="submit">Регистрирай се</button>
+            </form>
+            <p id="registerMessage" class="message"></p>
+            <a href="login.html">Вече имаш акаунт? Влез тук!</a>
         </div>
-    </div>
+    </main>
 
-    <script>
-        // Create falling star animation
-        function createStar() {
-            let star = document.createElement("div");
-            star.classList.add("falling-star");
-            star.style.left = Math.random() * 100 + "vw";
-            star.style.animationDuration = Math.random() * 3 + 2 + "s";
-            document.body.appendChild(star);
+    <footer class="footer">
+        <p>&copy; 2025 IceMC. Всички права запазени.</p>
+        <p>Minecraft is &copy; Mojang Synergies AB.</p>
+    </footer>
 
-            setTimeout(() => { star.remove(); }, 5000);
-        }
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-        // Initialize falling stars
-        document.addEventListener("DOMContentLoaded", function() {
-            setInterval(createStar, 300);
-        });
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7DEECNxcGlYdNkPLEz4K9Q_wrM9-HVMc",
+            authDomain: "icemc-site.firebaseapp.com",
+            projectId: "icemc-site",
+            storageBucket: "icemc-site.firebasestorage.app",
+            messagingSenderId: "748723124144",
+            appId: "1:748723124144:web:a3d9a13a4b44f7475d0875",
+            measurementId: "G-8QNKHEMJQE"
+        };
 
-        // Registration form handling
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Get the Auth service
+
+        const registerForm = document.getElementById('registerForm');
+        const registerEmail = document.getElementById('registerEmail');
+        const registerPassword = document.getElementById('registerPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const registerMessage = document.getElementById('registerMessage');
+
+        registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const username = document.getElementById('username').value;
-            const adminPassword = document.getElementById('adminPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
+            const email = registerEmail.value;
+            const password = registerPassword.value;
+            const confPassword = confirmPassword.value;
 
-            // Check if admin password is correct
-            if (adminPassword !== 'icemc.online.top.ez.bot.nog') {
-                alert('Грешна админ парола!');
+            if (password !== confPassword) {
+                registerMessage.textContent = 'Паролите не съвпадат!';
+                registerMessage.style.color = 'red';
                 return;
             }
 
-            // Store the user credentials
-            let users = JSON.parse(localStorage.getItem('staffUsers') || '{}');
-            users[username] = newPassword;
-            localStorage.setItem('staffUsers', JSON.stringify(users));
+            try {
+                // Create user with email and password using modular SDK
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log('User registered:', user);
+                registerMessage.textContent = 'Успешна регистрация! Пренасочваме...';
+                registerMessage.style.color = 'green';
+                
+                // Optionally send email verification
+                // await sendEmailVerification(user); // Uncomment if you want email verification
+                // console.log('Verification email sent!');
 
-            alert('Регистрацията е успешна!');
-            window.location.href = 'staff.html';
+                // Redirect after a short delay
+                setTimeout(() => {
+                    window.location.href = 'login.html'; // Redirect to login page
+                }, 2000);
+            } catch (error) {
+                console.error('Registration error:', error.message);
+                let errorMessage = 'Грешка при регистрация. Моля, опитайте отново.';
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'Този имейл вече е регистриран.';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Невалиден имейл адрес.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Паролата е твърде слаба. Моля, използвайте поне 6 символа.';
+                }
+                registerMessage.textContent = errorMessage;
+                registerMessage.style.color = 'red';
+            }
         });
     </script>
-</body>
+    <script type="module" src="scripts.js"></script> </body>
 </html>

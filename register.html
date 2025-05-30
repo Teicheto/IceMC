@@ -87,9 +87,15 @@
         <a href="discord.html">Discord</a>
         <a href="login.html" id="loginLink" class="auth-link">Вход</a>
         <a href="register.html" id="registerLink" class="auth-link active">Регистрация</a>
-        <a href="profile.html" id="profileLink" class="auth-link" style="display: none;">Профил</a>
-        <a href="settings.html" id="settingsLink" class="auth-link" style="display: none;">Настройки</a>
-        <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
+
+        <div class="user-menu-container" id="userMenuContainer" style="display: none;">
+            <span class="user-greeting" id="userGreeting">Здравейте, <span id="displayedUserName">Потребител</span></span>
+            <div class="user-dropdown">
+                <a href="profile.html">Моят Профил</a>
+                <a href="settings.html">Настройки</a>
+                <a href="#" id="logoutLinkDropdown">Изход</a>
+            </div>
+        </div>
     </div>
 
     <main>

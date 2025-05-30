@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - IceMC</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic styling for forms - adjust as needed */
+        .auth-container {
+            max-width: 500px;
+            margin: 80px auto 40px auto; /* Adjust margin-top to clear header */
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .auth-container h2 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 2em;
+            text-shadow: 1px 1px 3px #000;
+        }
+        .auth-container input[type="email"],
+        .auth-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+            outline: none;
+        }
+        .auth-container input[type="email"]:focus,
+        .auth-container input[type="password"]:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 8px rgba(255,204,0,0.5);
+        }
+        .auth-container button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .auth-container button:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
+        }
+        .auth-container .message {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #f00; /* For error messages */
+        }
+        .auth-container .success {
+            color: #0f0; /* For success messages */
+        }
+        .auth-container a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin-top: 15px;
+            display: block;
+            font-size: 0.95em;
+        }
+        .auth-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="index.html">Начало</a>
+        <a href="about.html">За нас</a>
+        <a href="join.html">Включи се</a>
+        <a href="rules.html">Правила</a>
+        <a href="features.html">Функции</a>
+        <a href="community.html">Общност</a>
+        <a href="vote.html">Гласувай</a>
+        <a href="gallery.html">Галерия</a>
+        <a href="staff.html">Екип</a>
+        <a href="discord.html">Discord</a>
+        <a href="login.html" id="loginLink" class="auth-link active">Вход</a>
+        <a href="register.html" id="registerLink" class="auth-link">Регистрация</a>
+        <a href="#" id="profileLink" class="auth-link" style="display: none;">Профил</a>
+        <a href="#" id="logoutLink" class="auth-link" style="display: none;">Изход</a>
+    </div>
+
+    <main>
+        <div class="container auth-container">
+            <h2>Вход</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Имейл" required>
+                <input type="password" id="loginPassword" placeholder="Парола" required>
+                <button type="submit">Вход</button>
+            </form>
+            <p id="loginMessage" class="message"></p>
+            <a href="#" id="forgotPasswordLink">Забравена парола?</a>
+            <a href="register.html">Нямаш акаунт? Регистрирай се!</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 IceMC. Всички права запазени.</p>
+        <p>Minecraft is &copy; Mojang Synergies AB.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA7DEECNxcGlYdNkPLEz4K9Q_wrM9-HVMc",
+            authDomain: "icemc-site.firebaseapp.com",
+            projectId: "icemc-site",
+            storageBucket: "icemc-site.firebasestorage.app",
+            messagingSenderId: "748723124144",
+            appId: "1:748723124144:web:a3d9a13a4b44f7475d0875",
+            measurementId: "G-8QNKHEMJQE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Get the Auth service
+
+        const loginForm = document.getElementById('loginForm');
+        const loginEmail = document.getElementById('loginEmail');
+        const loginPassword = document.getElementById('loginPassword');
+        const loginMessage = document.getElementById('loginMessage');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = loginEmail.value;
+            const password = loginPassword.value;
+
+            try {
+                // Sign in user with email and password using modular SDK
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log('User logged in:', user);
+                loginMessage.textContent = 'Успешен вход! Пренасочваме...';
+                loginMessage.style.color = 'green';
+                // Redirect to homepage or dashboard
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // Or 'dashboard.html' if you make one
+                }, 1500);
+            } catch (error) {
+                console.error('Login error:', error.message);
+                let errorMessage = 'Грешка при вход. Моля, опитайте отново.';
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    errorMessage = 'Невалиден имейл или парола.';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Невалиден имейл адрес.';
+                } else if (error.code === 'auth/user-disabled') {
+                    errorMessage = 'Този акаунт е деактивиран.';
+                }
+                loginMessage.textContent = errorMessage;
+                loginMessage.style.color = 'red';
+            }
+        });
+
+        forgotPasswordLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const email = loginEmail.value; // Use the email from the login field
+
+            if (!email) {
+                loginMessage.textContent = 'Моля, въведете имейл адреса си, за да възстановите парола.';
+                loginMessage.style.color = 'orange';
+                return;
+            }
+
+            try {
+                // Send password reset email using modular SDK
+                await sendPasswordResetEmail(auth, email);
+                loginMessage.textContent = 'Инструкции за възстановяване на парола са изпратени на вашия имейл.';
+                loginMessage.style.color = 'green';
+            } catch (error) {
+                console.error('Password reset error:', error.message);
+                let errorMessage = 'Грешка при изпращане на имейл за възстановяване.';
+                if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Невалиден имейл адрес.';
+                } else if (error.code === 'auth/user-not-found') {
+                    errorMessage = 'Няма потребител с този имейл адрес.';
+                }
+                loginMessage.textContent = errorMessage;
+                loginMessage.style.color = 'red';
+            }
+        });
+    </script>
+    <script type="module" src="scripts.js"></script> </body>
+</html>

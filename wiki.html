@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki - IceMC</title>
+    <style>
+        /* Global Reset & Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #09001a, #3a0ca3, #6a00f4);
+            background-attachment: fixed;
+            color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+            text-align: center; /* Applied globally, can be overridden */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+            cursor: url('images/pickaxe.jpg'), auto; /* Ensure pickaxe.jpg is in images folder */
+        }
+
+        .stars, .snow {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -10; /* Ensure it's behind all content */
+        }
+
+        .snow {
+            background: url('images/snow.png') repeat; /* Ensure snow.png is in images folder */
+            animation: snow 20s linear infinite; /* Slower snow */
+        }
+
+        @keyframes snow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; } /* Adjust for desired speed/density */
+        }
+
+        .star {
+            position: absolute;
+            width: 2px; /* Slightly smaller stars */
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 2s infinite alternate ease-in-out; /* Slower twinkle */
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 0.9; transform: scale(1.2); }
+        }
+
+        .menu {
+            background: rgba(10, 0, 26, 0.5); /* Darker, theme-aligned transparent background */
+            padding: 15px 25px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 15px; /* Adjusted gap */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Softer shadow */
+            position: fixed; /* Changed from sticky to fixed for consistent top position */
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px); /* Adjusted blur */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .menu a {
+            color: #e0e0e0; /* Lighter than pure white for better blend */
+            text-decoration: none;
+            font-size: 17px; /* Slightly smaller */
+            font-weight: 600; /* Poppins bold */
+            padding: 10px 18px; /* Adjusted padding */
+            border-radius: 8px; /* Softer radius */
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu a:hover, .menu a.active {
+            color: #09001a; /* Dark text on hover */
+            background: #ffcc00;
+            transform: scale(1.05) translateY(-2px); /* Subtle lift */
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        /* --- New User Menu Container Styling --- */
+        .user-menu-container {
+            position: relative; /* For dropdown positioning */
+            display: inline-block; /* Allows side-by-side with other menu items */
+            padding: 10px 15px; /* Matches existing padding */
+            background-color: rgba(0, 0, 0, 0.4); /* Slightly different background for distinction */
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px; /* Spacing from other menu items */
+            transition: background-color 0.3s ease;
+        }
+
+        .user-menu-container:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .user-greeting {
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: block; /* Ensures it takes full width of its container */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        #displayedUserName {
+            color: #ffcc00; /* Highlight the username */
+        }
+
+        .user-dropdown {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%; /* Position right below the user-greeting */
+            left: 0;
+            width: 100%; /* Match width of the container */
+            min-width: 160px; /* Ensure enough space for longer text */
+            background-color: rgba(0, 0, 0, 0.9); /* Darker background for dropdown */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+            z-index: 1000; /* Ensure it's on top of other content */
+            border-radius: 0 0 5px 5px; /* Rounded corners only at bottom */
+            overflow: hidden; /* For rounded corners */
+        }
+
+        .user-dropdown a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 1em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .user-dropdown a:hover {
+            background-color: rgba(255, 204, 0, 0.2); /* Light highlight on hover */
+            color: #ffcc00;
+        }
+
+        /* Show the dropdown menu on hover */
+        .user-menu-container:hover .user-dropdown {
+            display: block;
+        }
+
+        /* Specific styling for the logout link in the dropdown */
+        #logoutLinkDropdown {
+            color: #ff6347; /* Tomato color for logout */
+            font-weight: bold;
+        }
+
+        #logoutLinkDropdown:hover {
+            background-color: rgba(255, 99, 71, 0.2); /* Lighter tomato highlight */
+            color: #ff8c00;
+        }
+        /* --- End of New User Menu Container Styling --- */
+
+
+        /* Logo Styling */
+        .logo {
+            width: 50px; /* Adjust this value to make the logo smaller or larger */
+            height: auto; /* Maintains the aspect ratio of the logo */
+            vertical-align: middle; /* Helps align the logo nicely if it's next to text */
+            margin-right: 10px; /* Adds a little space if text is directly next to it */
+        }
+
+        /* General page structure */
+        main {
+            padding-top: 100px; /* Account for fixed menu height + some space */
+            padding-bottom: 40px;
+        }
+
+        .container {
+            width: 90%; /* More responsive width */
+            max-width: 1200px; /* Max width for large screens */
+            margin: 20px auto; /* Top margin adjusted, auto for left/right */
+            padding: 30px; /* Adjusted padding */
+            background: rgba(0, 0, 0, 0.65); /* Slightly more opaque */
+            border-radius: 15px; /* Softer radius */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: left; /* Override global text-align for content */
+        }
+
+        .container h1, .container h2 {
+            color: #f0f0f0;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(106, 0, 244, 0.5); /* Subtle glow matching theme */
+        }
+
+        .container h1 { font-size: 2.8em; }
+        .container h2 { font-size: 2.2em; }
+        .container h3 {
+            color: #ffcc00; /* Accent color for subheadings */
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        .container p, .container li {
+            font-size: 1.05em;
+            line-height: 1.7;
+            color: #d0d0d0; /* Slightly softer than pure white for paragraph text */
+            margin-bottom: 15px;
+        }
+
+        .container ul, .container ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container a {
+            color: #ffcc00; /* Accent color for links */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .container a:hover {
+            color: #ffd633; /* Lighter accent on hover */
+            text-decoration: underline;
+        }
+
+        /* Server Info (Example from user CSS, can be used on index or join page) */
+        .server-info {
+            background: linear-gradient(to right, #6a00f4, #3a0ca3);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(106, 0, 244, 0.6);
+            animation: glow 2.5s infinite alternate;
+            margin-bottom: 30px;
+            color: white;
+        }
+        .server-info p { color: white; }
+        .server-info strong { color: #ffcc00; }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 15px rgba(106, 0, 244, 0.4); }
+            to { box-shadow: 0 0 30px rgba(106, 0, 244, 0.8); }
+        }
+
+        /* Content sections like news, sidebar (Example from user CSS) */
+        .content-flex { /* Renamed from .content to avoid conflict if any */
+            display: flex;
+            justify-content: space-between;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .news-section-wrapper, .sidebar-section { /* Renamed from .news, .sidebar */
+            flex: 1;
+            background: linear-gradient(135deg, rgba(106, 0, 244, 0.2), rgba(58, 12, 163, 0.2));
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .news-article { /* Renamed from .news-section */
+            background: rgba(255, 255, 255, 0.05); /* Very subtle */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Rules specific styling (Example from user CSS) */
+        .rules-list ul, .faq-list ul, .vote-sites-list ul, .feature-list ul { /* Generalizing for lists */
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-list li, .faq-list li, .vote-sites-list li, .feature-list .feature-item {
+            margin: 12px 0;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border-left: 4px solid #6a00f4; /* Theme accent border */
+        }
+
+        .rules-list li:hover, .faq-list li:hover, .vote-sites-list li:hover, .feature-list .feature-item:hover {
+            transform: translateX(8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            border-left-color: #ffcc00;
+        }
+
+        .rules-list li span, .faq-list li span { /* For highlighted text within list items */
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn, .cta-button, .copy-ip-button, .discord-button { /* Consolidating button styles */
+            display: inline-block;
+            background: linear-gradient(135deg, #ffcc00, #ffa500); /* Gold/Orange gradient */
+            color: #09001a; /* Dark text for contrast */
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px; /* Pill shape */
+            cursor: pointer;
+            font-size: 1.1em; /* Adjusted */
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px; /* Add some margin */
+        }
+
+        .btn:hover, .cta-button:hover, .copy-ip-button:hover, .discord-button:hover {
+            background: linear-gradient(135deg, #ffa500, #ffcc00); /* Reverse gradient */
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.6);
+        }
+
+        .btn:active, .cta-button:active, .copy-ip-button:active, .discord-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Discord Specific (from user CSS, can be used on community/discord page) */
+        .discord-section { /* For a section promoting Discord */
+            background: linear-gradient(to bottom, #5865F2, #7289DA); /* Discord colors */
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            margin: 30px auto;
+            box-shadow: 0px 0px 20px rgba(88, 101, 242, 0.5);
+        }
+
+        .discord-btn { /* Specific for a Discord join button if different from .btn */
+            display: inline-block;
+            background: #404EED; /* Discord blurple */
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .discord-btn:hover {
+            background: #303db8; /* Darker blurple */
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px; /* More padding */
+            margin-top: 40px;
+            font-size: 0.95em; /* Slightly larger */
+            color: rgba(240, 240, 240, 0.7); /* Lighter, more readable */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 0, 26, 0.3); /* Subtle background for footer */
+        }
+        .footer p { margin-bottom: 5px; }
+
+        /* Added animations for better visual effects (from user CSS) */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container > section, .container > div:not(.staff-grid) { /* Apply to direct children sections/divs */
+            animation: fadeIn 0.6s ease-out forwards;
+            animation-delay: 0.2s; /* Slight delay */
+        }
+
+        /* Staff Page Styles - Adapted to new theme */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+            animation: fadeIn 0.6s ease-out forwards; /* Apply fadeIn to the grid itself */
+            animation-delay: 0.4s;
+        }
+
+        .staff-member {
+            background: rgba(20, 0, 40, 0.7); /* Darker purple, semi-transparent */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .staff-member:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 204, 0, 0.5); /* Enhanced glow */
+        }
+
+        .staff-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #ffcc00; /* Accent color from menu hover */
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+        }
+
+        .staff-member h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.7em; /* Slightly larger */
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .staff-member .role {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #09001a; /* Dark text for contrast */
+            padding: 7px 20px;
+            border-radius: 25px; /* More rounded */
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px; /* More spacing */
+        }
+
+        .staff-member p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #c0c0c0; /* Softer text for description */
+            flex-grow: 1;
+        }
+
+        /* Gallery Page Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.05);
+            border-color: #ffcc00;
+        }
+
+        /* Discord Widget Styling */
+        .discord-widget-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .discord-widget-container iframe {
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            .container h1 { font-size: 2.2em; }
+            .container h2 { font-size: 1.8em; }
+
+            .menu {
+                padding: 10px 15px; /* Reduced padding */
+                justify-content: space-around; /* Better for wrapping */
+            }
+            .menu a {
+                font-size: 15px; /* Smaller font */
+                padding: 8px 12px; /* Smaller padding */
+            }
+
+            .content-flex {
+                flex-direction: column;
+            }
+
+            .staff-member h3 { font-size: 1.5em; }
+            .staff-member .role { font-size: 0.85em; padding: 6px 15px; }
+            .staff-member p { font-size: 0.9em; }
+
+            /* Adjust user menu on smaller screens */
+            .user-menu-container {
+                padding: 8px 12px; /* Smaller padding */
+                margin-left: 5px; /* Less margin */
+            }
+            .user-greeting {
+                font-size: 1em; /* Smaller font */
+            }
+            .user-dropdown {
+                min-width: unset; /* Remove min-width constraint */
+                width: 150px; /* Fixed width, or adjust as needed */
+                right: 0; /* Align to the right of the container */
+                left: unset;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                cursor: auto; /* Disable custom cursor on small touch devices */
+            }
+            .container h1 { font-size: 2em; }
+            .container h2 { font-size: 1.6em; }
+            .menu a { font-size: 14px; padding: 8px 10px; margin: 3px; }
+            .staff-grid { grid-template-columns: 1fr; } /* Single column for staff */
+            .btn, .cta-button, .copy-ip-button, .discord-button { font-size: 1em; padding: 10px 20px; }
+            .user-dropdown {
+                width: 140px; /* Even smaller for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="snow"></div>
+
+    <header>
+        <nav class="menu">
+            <a href="https://icemc.site" class="active">
+                <img src="https://icemc.site/images/logo.png" alt="IceMC Logo" class="logo"> Начало
+            </a>
+            <a href="https://icemc.site/rules.html">Правила</a>
+            <a href="https://icemc.site/store.html">Магазин</a>
+            <a href="https://icemc.site/vote.html">Гласувай</a>
+            <a href="https://icemc.site/staff.html">Екип</a>
+            <a href="https://icemc.site/gallery.html">Галерия</a>
+            <a href="#">Wiki</a> <div class="user-menu-container">
+                <span class="user-greeting">Здравейте, <span id="displayedUserName">Гост</span></span>
+                <div class="user-dropdown">
+                    <a href="#">Профил</a>
+                    <a href="#">Настройки</a>
+                    <a href="#" id="logoutLinkDropdown">Изход</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>IceMC Wiki</h1>
+            <p>
+                Добре дошли в официалната Wiki страница на IceMC! Тук ще намерите подробна информация за сървъра, неговите режими, механики, правила, история и много други. Целта на тази Wiki е да бъде изчерпателен ресурс за всички играчи – нови и ветерани.
+            </p>
+
+            ---
+
+            <section id="about">
+                <h2>За IceMC</h2>
+                <p>
+                    IceMC е водещ български Minecraft сървър, създаден с мисията да предостави уникално и забавно гейминг изживяване. Основан през <span style="color: #ffcc00; font-weight: bold;">[Година на създаване]</span>, сървърът бързо се утвърди като любимо място за хиляди играчи благодарение на своите иновативни режими, активна общност и отдаден екип. Ние се стремим да поддържаме стабилна и приятелска среда, където всеки може да намери своето място.
+                </p>
+                <p>
+                    Основната ни философия е да предлагаме постоянно обновяващо се съдържание и да слушаме обратната връзка от нашата общност. Присъединете се към нас и станете част от семейството на IceMC!
+                </p>
+            </section>
+
+            ---
+
+            <section id="gamemodes">
+                <h2>Режими на игра</h2>
+                <p>IceMC предлага разнообразие от режими, за да удовлетвори вкуса на всеки играч. Ето някои от най-популярните:</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>Survival</h3>
+                        <p>
+                            Изживейте класическия Minecraft Survival, но с подобрения! В IceMC Survival ще откриете персонализирани енчантмънти, уникални предмети, защитени зони за строене, икономика, управлявана от играчи, и редовни събития. Работете заедно с приятели или изследвайте сами огромния свят, събирайте ресурси, стройте бази и се изправяйте пред предизвикателства.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>SkyBlock</h3>
+                        <p>
+                            Тествайте уменията си за оцеляване на малък остров в небето! Започнете с няколко основни предмета и развийте своя остров, изпълнявайте предизвикателства, търгувайте с други играчи и станете най-богатият SkyBlock играч. IceMC SkyBlock включва персонализирани острови, мисии и системи за класиране.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Creative</h3>
+                        <p>
+                            Разгърнете въображението си в нашия Creative режим. Получете достъп до всички блокове и предмети, за да строите каквото пожелаете, без ограничения. Този режим е идеален за тези, които обичат да творят, да тестват нови идеи или просто да се забавляват без грижи.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>[Име на друг режим, напр. Minigames/Factions]</h3>
+                        <p>
+                            Описание на [Име на друг режим]. Тук можете да добавите подробности за други режими, които сървърът предлага.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            ---
+
+            <section id="commands">
+                <h2>Полезни Команди</h2>
+                <p>Ето списък с често използвани команди, които ще ви помогнат да навигирате и да взаимодействате в IceMC:</p>
+                <ul>
+                    <li><span>/spawn</span> - Телепортира ви до главния спаун на сървъра.</li>
+                    <li><span>/sethome [име]</span> - Задава домашен пункт, до който можете да се телепортирате.</li>
+                    <li><span>/home [име]</span> - Телепортира ви до зададения домашен пункт.</li>
+                    <li><span>/tpa [играч]</span> - Изпраща заявка за телепортация до друг играч.</li>
+                    <li><span>/tpaccept</span> - Приема входяща заявка за телепортация.</li>
+                    <li><span>/warp [име]</span> - Телепортира ви до публични точки (варпове).</li>
+                    <li><span>/balance</span> или <span>/bal</span> - Показва текущото ви количество пари.</li>
+                    <li><span>/pay [играч] [сума]</span> - Изпраща пари на друг играч.</li>
+                    <li><span>/shop</span> - Отваря менюто на сървърния магазин.</li>
+                    <li><span>/wild</span> - Телепортира ви на случайно място в света на Survival.</li>
+                    <li><span>/discord</span> - Показва връзката към нашия Discord сървър.</li>
+                    <li><span>/rules</span> - Показва правилата на сървъра.</li>
+                    <li><span>/vote</span> - Показва сайтовете за гласуване.</li>
+                    <li><span>/help</span> - Показва основните команди.</li>
+                </ul>
+            </section>
+
+            ---
+
+            <section id="faq">
+                <h2>Често задавани въпроси (FAQ)</h2>
+                <div class="faq-list">
+                    <li>
+                        <h3>Как мога да се присъединя към IceMC?</h3>
+                        <p>
+                            Можете да се присъедините към IceMC, като отворите Minecraft, изберете "Multiplayer" (Мултиплейър), след това "Add Server" (Добавяне на сървър) и въведете нашия IP адрес: <strong>play.icemc.site</strong>.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Какви са правилата на сървъра?</h3>
+                        <p>
+                            Нашите правила са създадени, за да осигурят честна и приятна среда за всички. Можете да ги прочетете подробно на страницата <a href="https://icemc.site/rules.html">Правила</a> или чрез командата <span>/rules</span> в играта.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Как мога да получа помощ?</h3>
+                        <p>
+                            Ако имате нужда от помощ, можете да зададете въпрос в чата на играта, като използвате <span>/helpop [вашият въпрос]</span>, да се присъедините към нашия <a href="https://discord.gg/[Вашият Discord покана]">Discord сървър</a> и да попитате в съответните канали, или да се свържете с член на екипа.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Как да подкрепя сървъра?</h3>
+                        <p>
+                            Можете да подкрепите IceMC, като гласувате за нас ежедневно на различните сайтове за гласуване (<a href="https://icemc.site/vote.html">/vote</a>) или като закупите ранг/предмети от нашия <a href="https://icemc.site/store.html">Магазин</a>. Всяка подкрепа е високо ценена и помага за развитието на сървъра!
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Какви са изискванията за ранг в екипа?</h3>
+                        <p>
+                            Изискванията за присъединяване към екипа на IceMC варират според позицията. Обикновено търсим активни, отговорни и зрели играчи, които познават правилата и са готови да помагат на общността. Следете нашите обяви в Discord или на сайта за отворени позиции.
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Какво е Discord сървърът на IceMC?</h3>
+                        <p>
+                            Нашият Discord сървър е центърът на общността на IceMC. Тук можете да разговаряте с други играчи, да получавате новини и актуализации, да участвате в събития и да получавате поддръжка от екипа. Присъединете се тук: <a href="https://discord.gg/[Вашият Discord покана]">Discord покана</a>.
+                        </p>
+                    </li>
+                </div>
+            </section>
+
+            ---
+
+            <section id="history">
+                <h2>История на IceMC</h2>
+                <p>
+                    IceMC е основан от [Име на основател/и] през [Месец, Година] с първоначална визия за [първоначална визия]. През годините сървърът премина през много етапи на развитие, добавяйки нови режими, функционалности и подобрявайки общото изживяване.
+                </p>
+                <p>
+                    Едни от ключовите моменти в историята на IceMC включват:
+                </p>
+                <ul>
+                    <li><span style="color: #ffcc00; font-weight: bold;">[Година/Месец]</span>: Стартиране на сървъра.</li>
+                    <li><span style="color: #ffcc00; font-weight: bold;">[Година/Месец]</span>: Въвеждане на [Значителна функция/режим].</li>
+                    <li><span style="color: #ffcc00; font-weight: bold;">[Година/Месец]</span>: Редизайн на уебсайта и подобрения в производителността.</li>
+                    <li><span style="color: #ffcc00; font-weight: bold;">[Година/Месец]</span>: Достигане на [Брой] едновременни играчи.</li>
+                    <li><span style="color: #ffcc00; font-weight: bold;">[Година/Месец]</span>: [Друго значимо събитие].</li>
+                </ul>
+                <p>
+                    Благодарим на всички играчи, които са били част от това пътешествие и са помогнали на IceMC да стане това, което е днес!
+                </p>
+            </section>
+
+            ---
+
+            <section id="staff">
+                <h2>Екип на IceMC</h2>
+                <p>
+                    Екипът на IceMC е съставен от отдадени и страстни хора, които работят усилено, за да осигурят най-доброто изживяване за нашата общност. Всеки член на екипа играе важна роля в поддържането на сървъра, отговарянето на въпроси и прилагането на правилата.
+                </p>
+                <div class="staff-grid">
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/120/ffcc00/09001a?text=Admin" alt="[Име на Админ]">
+                        <h3>[Име на Админ]</h3>
+                        <span class="role">Администратор</span>
+                        <p>
+                            [Кратко описание на ролята/задълженията на администратора]. Отговаря за цялостното управление на сървъра и поддръжката.
+                        </p>
+                    </div>
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/120/6a00f4/f0f0f0?text=Mod" alt="[Име на Модератор]">
+                        <h3>[Име на Модератор]</h3>
+                        <span class="role">Модератор</span>
+                        <p>
+                            [Кратко описание на ролята/задълженията на модератора]. Поддържа реда в играта и отговаря на въпроси.
+                        </p>
+                    </div>
+                    <div class="staff-member">
+                        <img src="https://via.placeholder.com/120/3a0ca3/f0f0f0?text=Builder" alt="[Име на Строител]">
+                        <h3>[Име на Строител]</h3>
+                        <span class="role">Строител</span>
+                        <p>
+                            [Кратко описание на ролята/задълженията на строителя]. Създава красиви и функционални постройки.
+                        </p>
+                    </div>
+                    </div>
+            </section>
+
+            ---
+
+            <section id="contact">
+                <h2>Контакти и Поддръжка</h2>
+                <p>
+                    Ако имате въпроси, предложения или се нуждаете от поддръжка, не се колебайте да се свържете с нас чрез следните канали:
+                </p>
+                <ul>
+                    <li><strong>Discord:</strong> <a href="https://discord.gg/[Вашият Discord покана]">Присъединете се към нашия Discord сървър</a> за бърза помощ и комуникация с общността.</li>
+                    <li><strong>Имейл:</strong> <a href="mailto:support@icemc.site">support@icemc.site</a> (за по-сериозни запитвания).</li>
+                    <li><strong>В играта:</strong> Използвайте <span>/helpop [вашият въпрос]</span> или се свържете с онлайн член на екипа.</li>
+                </ul>
+                <p>
+                    Ние ценим вашата обратна връзка и се стремим да отговорим на всички запитвания възможно най-бързо!
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2023-2025 IceMC. Всички права запазени.</p>
+        <p>Създадено с <span style="color: #ffcc00;">♥</span> за Minecraft общността.</p>
+    </footer>
+
+    <script>
+        // JavaScript for dynamic effects or user management (optional)
+        // You'll need to implement actual login/logout logic if you want the user menu to be functional.
+
+        // Example for dynamic star generation
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 100; // Adjust for desired density
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`; // Random delay for twinkle
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Placeholder for username display - you'd replace this with actual user session data
+        document.addEventListener('DOMContentLoaded', () => {
+            const userNameSpan = document.getElementById('displayedUserName');
+            // In a real application, you'd fetch the user's name from a backend
+            // For now, it remains 'Гост' or can be set manually for testing:
+            // userNameSpan.textContent = "ВашетоИме";
+        });
+    </script>
+</body>
+</html>
